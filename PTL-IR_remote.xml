@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/seba/projects/PostTenebrasLab/PTL-ir_remote/PTL-IR_remote.sch</source>
+    <date>Sun 15 Jul 2018 08:53:43 AM CEST</date>
+    <tool>Eeschema 4.0.7</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>PTL IR remote </title>
+        <company>Post Tenebras Lab </company>
+        <rev>v1.0</rev>
+        <date>2018-07-15</date>
+        <source>PTL-IR_remote.sch</source>
+        <comment number="1" value="Atelier LemanMake 2018"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="D1">
+      <value>IR204A</value>
+      <footprint>LEDs:LED_D3.0mm</footprint>
+      <libsource lib="opto" part="IR204A"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B433B66</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>10Ω</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B433CA2</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>100n</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B4343A1</tstamp>
+    </comp>
+    <comp ref="Q1">
+      <value>2N7002</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <libsource lib="transistors" part="2N7002"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B48C0DB</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>TSOP45xx</value>
+      <footprint>Opto-Devices:IRReceiver_Vishay_MOLD-3pin</footprint>
+      <libsource lib="opto" part="TSOP45xx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B48CD02</tstamp>
+    </comp>
+    <comp ref="8pins1">
+      <value>J1</value>
+      <footprint>Socket_Strips:Socket_Strip_Angled_1x08_Pitch2.54mm</footprint>
+      <libsource lib="conn" part="Conn_01x08_Female"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B48DB47</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>8pins</value>
+      <footprint>Socket_Strips:Socket_Strip_Angled_1x08_Pitch2.54mm</footprint>
+      <libsource lib="conn" part="Conn_01x08_Female"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B48DCEC</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>R_PHOTO</value>
+      <footprint>Socket_Strips:Socket_Strip_Straight_1x02_Pitch2.54mm</footprint>
+      <libsource lib="device" part="R_PHOTO"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B48DA29</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>1kΩ</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B48DE24</tstamp>
+    </comp>
+    <comp ref="J3">
+      <value>4pins</value>
+      <footprint>Pin_Headers:Pin_Header_Angled_1x04_Pitch2.54mm</footprint>
+      <libsource lib="conn" part="Conn_01x04_Male"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B48E4DC</tstamp>
+    </comp>
+    <comp ref="TH1">
+      <value>DHT22</value>
+      <footprint>Socket_Strips:Socket_Strip_Angled_1x04_Pitch2.54mm</footprint>
+      <libsource lib="sensors" part="DHT22_Temperature_Humidity"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B48F14D</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>220Ω</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B4911B0</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>IR204A</value>
+      <footprint>LEDs:LED_D3.0mm</footprint>
+      <libsource lib="opto" part="IR204A"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B4AEBDC</tstamp>
+    </comp>
+    <comp ref="TH2">
+      <value>DS18B20 one wire</value>
+      <footprint>Socket_Strips:Socket_Strip_Angled_1x03_Pitch2.54mm</footprint>
+      <libsource lib="sensors" part="DHT11_Temperature_Humidity"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B4AF2B0</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>4.7kΩ</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5B4AFAC2</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="transistors" part="BSS138">
+      <aliases>
+        <alias>2N7002</alias>
+        <alias>MMBF170</alias>
+      </aliases>
+      <description>50V Vds, 0.22 A Id, N-channel MOSFET, SOT-23</description>
+      <docs>https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf</docs>
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">BSS138</field>
+        <field name="Footprint">TO_SOT_Packages_SMD:SOT-23</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="C">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="Conn_01x04_Male">
+      <description>Generic connector, single row, 01x04</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_??x*mm*</fp>
+        <fp>Connector*:*1x??x*mm*</fp>
+        <fp>Pin?Header?Straight?1X*</fp>
+        <fp>Pin?Header?Angled?1X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04_Male</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="Conn_01x08_Female">
+      <description>Generic connector, single row, 01x08</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_??x*mm*</fp>
+        <fp>Connector*:*1x??x*mm*</fp>
+        <fp>Socket?Strip?Straight?1X*</fp>
+        <fp>Socket?Strip?Angled?1X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x08_Female</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="sensors" part="DHT11_Temperature_Humidity">
+      <description>A DHT11 temperature and humidity sensor</description>
+      <fields>
+        <field name="Reference">TH</field>
+        <field name="Value">DHT11_Temperature_Humidity</field>
+      </fields>
+      <pins>
+        <pin num="1" name="DATA" type="input"/>
+        <pin num="2" name="VCC" type="power_in"/>
+        <pin num="3" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="sensors" part="DHT22_Temperature_Humidity">
+      <description>A DHT22 temperature and humidity sensor</description>
+      <fields>
+        <field name="Reference">TH</field>
+        <field name="Value">DHT22_Temperature_Humidity</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="DATA" type="input"/>
+        <pin num="3" name="NULL" type="NotConnected"/>
+        <pin num="4" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="R">
+      <description>Resistor</description>
+      <footprints>
+        <fp>R_*</fp>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="R_PHOTO">
+      <description>Photoresistor, light sensitive resistor, LDR</description>
+      <footprints>
+        <fp>R?</fp>
+        <fp>R?-*</fp>
+        <fp>LDR*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_PHOTO</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="opto" part="SFH4356P">
+      <aliases>
+        <alias>IR204A</alias>
+        <alias>TSAL4400</alias>
+        <alias>SFH4346</alias>
+      </aliases>
+      <description>Infrared LED , 3mm LED package</description>
+      <docs>http://www.osram-os.com/Graphics/XPic5/00181708_0.pdf</docs>
+      <footprints>
+        <fp>LED*3mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">SFH4356P</field>
+        <field name="Footprint">LEDs:LED_D3.0mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="opto" part="TSDP341xx">
+      <aliases>
+        <alias>TSDP343xx</alias>
+        <alias>TSOP341xx</alias>
+        <alias>TSOP343xx</alias>
+        <alias>TSOP345xx</alias>
+        <alias>TSOP41xx</alias>
+        <alias>TSOP43xx</alias>
+        <alias>TSOP45xx</alias>
+      </aliases>
+      <description>IR Receiver Modules for Data Transmission</description>
+      <docs>http://www.vishay.com/docs/82667/tsdp341.pdf</docs>
+      <footprints>
+        <fp>IRReceiver?Vishay?MOLD*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TSDP341xx</field>
+        <field name="Footprint">Opto-Devices:IRReceiver_Vishay_MOLD-3pin</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="output"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="Vs" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="sensors">
+      <uri>/home/seba/projects/kicad/libraries/kicad-lib/sensors.lib</uri>
+    </library>
+    <library logical="device">
+      <uri>/usr/share/kicad/library/device.lib</uri>
+    </library>
+    <library logical="transistors">
+      <uri>/usr/share/kicad/library/transistors.lib</uri>
+    </library>
+    <library logical="conn">
+      <uri>/usr/share/kicad/library/conn.lib</uri>
+    </library>
+    <library logical="opto">
+      <uri>/usr/share/kicad/library/opto.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/SCL">
+      <node ref="J3" pin="2"/>
+      <node ref="J2" pin="6"/>
+    </net>
+    <net code="2" name="/ADC">
+      <node ref="8pins1" pin="2"/>
+      <node ref="R1" pin="1"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="3" name="/SDA">
+      <node ref="J2" pin="5"/>
+      <node ref="J3" pin="1"/>
+    </net>
+    <net code="4" name="GND">
+      <node ref="J2" pin="2"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="TH2" pin="3"/>
+      <node ref="U1" pin="2"/>
+      <node ref="J3" pin="3"/>
+      <node ref="C1" pin="2"/>
+      <node ref="R1" pin="2"/>
+      <node ref="TH1" pin="4"/>
+    </net>
+    <net code="5" name="+3V3">
+      <node ref="8pins1" pin="8"/>
+      <node ref="R3" pin="1"/>
+      <node ref="TH2" pin="2"/>
+      <node ref="J3" pin="4"/>
+      <node ref="R5" pin="2"/>
+    </net>
+    <net code="6" name="+5V">
+      <node ref="J2" pin="1"/>
+      <node ref="TH1" pin="1"/>
+      <node ref="D2" pin="2"/>
+      <node ref="R4" pin="1"/>
+    </net>
+    <net code="7" name="Net-(TH1-Pad3)">
+      <node ref="TH1" pin="3"/>
+    </net>
+    <net code="8" name="Net-(D1-Pad2)">
+      <node ref="D1" pin="2"/>
+      <node ref="D2" pin="1"/>
+    </net>
+    <net code="9" name="/D6">
+      <node ref="TH2" pin="1"/>
+      <node ref="R5" pin="1"/>
+      <node ref="8pins1" pin="5"/>
+    </net>
+    <net code="11" name="/D4">
+      <node ref="TH1" pin="2"/>
+      <node ref="J2" pin="3"/>
+    </net>
+    <net code="12" name="/D5">
+      <node ref="8pins1" pin="4"/>
+      <node ref="U1" pin="1"/>
+    </net>
+    <net code="13" name="Net-(C1-Pad1)">
+      <node ref="R4" pin="2"/>
+      <node ref="C1" pin="1"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="14" name="Net-(8pins1-Pad1)">
+      <node ref="8pins1" pin="1"/>
+    </net>
+    <net code="15" name="Net-(8pins1-Pad3)">
+      <node ref="8pins1" pin="3"/>
+    </net>
+    <net code="16" name="Net-(8pins1-Pad6)">
+      <node ref="8pins1" pin="6"/>
+    </net>
+    <net code="17" name="Net-(8pins1-Pad7)">
+      <node ref="8pins1" pin="7"/>
+    </net>
+    <net code="18" name="Net-(J2-Pad8)">
+      <node ref="J2" pin="8"/>
+    </net>
+    <net code="19" name="Net-(J2-Pad7)">
+      <node ref="J2" pin="7"/>
+    </net>
+    <net code="20" name="Net-(D1-Pad1)">
+      <node ref="D1" pin="1"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="21" name="Net-(Q1-Pad3)">
+      <node ref="Q1" pin="3"/>
+      <node ref="R2" pin="2"/>
+    </net>
+    <net code="22" name="Net-(J2-Pad4)">
+      <node ref="Q1" pin="1"/>
+      <node ref="J2" pin="4"/>
+    </net>
+  </nets>
+</export>

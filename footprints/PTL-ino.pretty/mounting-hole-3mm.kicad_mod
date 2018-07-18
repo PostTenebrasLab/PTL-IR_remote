@@ -1,0 +1,9 @@
+(module PTL-ino:mounting-hole-3mm (layer F.Cu) (tedit 56E4DAF2)
+  (fp_text reference "mouting hole 3mm" (at 0 -4.445) (layer F.SilkS) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value VAL** (at 0 4.445) (layer F.SilkS) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (pad "" thru_hole circle (at 0 0) (size 6 6) (drill 3) (layers *.Cu *.Mask))
+)
