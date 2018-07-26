@@ -169,10 +169,10 @@ Wire Wire Line
 Wire Wire Line
 	5050 2750 5050 2650
 $Comp
-L R_PHOTO PR
+L R_PHOTO PR1
 U 1 1 5B48DA29
 P 3050 4100
-F 0 "PR" H 3100 4150 50  0000 L CNN
+F 0 "PR1" H 3100 4150 50  0000 L CNN
 F 1 "PHOTO" H 3100 4100 50  0000 L TNN
 F 2 "Socket_Strips:Socket_Strip_Straight_1x02_Pitch2.54mm" V 3100 3850 50  0001 L CNN
 F 3 "" H 3050 4050 50  0001 C CNN
@@ -1011,4 +1011,12 @@ F 3 "" H 5800 4550 50  0001 C CNN
 	1    5800 4550
 	1    0    0    -1  
 $EndComp
+Text Notes 8250 950  0    60   ~ 0
+Passer sensors en 3V3
+Text Notes 8250 1100 0    60   ~ 0
+Corriger plan de masse
+Text Notes 8250 1300 0    60   ~ 0
+Ev version pass through\n
+Text Notes 8250 1500 0    60   ~ 0
+mesurer tension sur pin data IRM
 $EndSCHEMATC
