@@ -1,0 +1,14 @@
+### Module positions - created on Sat Jul 28 11:38:05 2018 ###
+### Printed by Pcbnew version kicad 5.0.0
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val         Package                    PosX       PosY       Rot  Side
+C1        100n        C_0603_HandSoldering    12.1920     5.3340   90.0000  top
+D3        DIODE       R_0805                  12.1260    12.7000  180.0000  top
+D4        WS2813      LED_WS2812-PLCC6         7.3660     9.3980  270.0000  top
+Q1        2N7002      SOT-23                  14.4780     9.3980    0.0000  top
+R1        1kΩ_(10kΩ)  R_0805                  16.1900    12.7000  180.0000  top
+R2        22Ω        R_0805                  14.7320     4.8260  180.0000  top
+R4        220Ω       R_0805                  14.7320     1.6510  180.0000  top
+R5        4.7kΩ      R_0805                  19.3040    34.2240   90.0000  top
+## End
