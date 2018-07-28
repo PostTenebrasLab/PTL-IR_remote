@@ -1,0 +1,5 @@
+LED RGB WS2813 - http://www.normandled.com/upload/201605/WS2813%20LED%20Datasheet.pdf
+DHT22 - https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf
+MOSFET 2N7002 - https://assets.nexperia.com/documents/data_sheet/2N7002.pdf
+IR receiver TSOP4838 - https://www.vishay.com/docs/82459/tsop48.pdf
+bme280 - https://www.embeddedadventures.com/datasheets/BME280.pdf
