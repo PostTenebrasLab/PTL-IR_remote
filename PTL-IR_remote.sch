@@ -7,7 +7,7 @@ encoding utf-8
 Sheet 1 1
 Title "PTL IR remote "
 Date "2018-07-15"
-Rev "v1.0"
+Rev "v1.1"
 Comp "Post Tenebras Lab "
 Comment1 "Atelier LemanMake 2018"
 Comment2 ""
@@ -94,7 +94,7 @@ P 10100 3200
 F 0 "Q1" H 10300 3275 50  0000 L CNN
 F 1 "2N7002" H 10300 3200 50  0000 L CNN
 F 2 "TO_SOT_Packages_SMD:SOT-23" H 10300 3125 50  0001 L CIN
-F 3 "" H 10100 3200 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data_sheet/2N7002.pdf" H 10100 3200 50  0001 L CNN
 	1    10100 3200
 	1    0    0    -1  
 $EndComp
@@ -105,7 +105,7 @@ P 1800 1450
 F 0 "U1" H 1400 1750 50  0000 L CNN
 F 1 "TSOP4838" H 1400 1150 50  0000 L CNN
 F 2 "Opto-Devices:IRReceiver_Vishay_MOLD-3pin" H 1750 1075 50  0001 C CNN
-F 3 "" H 2450 1750 50  0001 C CNN
+F 3 " https://www.vishay.com/docs/82459/tsop48.pdf" H 2450 1750 50  0001 C CNN
 	1    1800 1450
 	1    0    0    -1  
 $EndComp
@@ -168,7 +168,7 @@ P 2000 2950
 F 0 "DHT22" H 2000 4000 60  0000 C CNN
 F 1 "DHT22" H 2000 3900 60  0000 C CNN
 F 2 "Socket_Strips:Socket_Strip_Straight_1x04_Pitch2.54mm" H 2000 2950 60  0001 C CNN
-F 3 "" H 2000 2950 60  0000 C CNN
+F 3 " https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf" H 2000 2950 60  0000 C CNN
 	1    2000 2950
 	0    1    1    0   
 $EndComp
@@ -1074,7 +1074,7 @@ P 2750 7100
 F 0 "bme280" H 2750 7300 50  0000 C CNN
 F 1 "bme280" H 2750 6800 50  0000 C CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 2750 7100 50  0001 C CNN
-F 3 "" H 2750 7100 50  0001 C CNN
+F 3 "https://www.embeddedadventures.com/datasheets/BME280.pdf" H 2750 7100 50  0001 C CNN
 	1    2750 7100
 	-1   0    0    1   
 $EndComp
