@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/seba/projects/PostTenebrasLab/PTL-ir_remote/PTL-IR_remote.sch</source>
-    <date>Sat 28 Jul 2018 11:34:43 AM CEST</date>
+    <date>Mon 30 Jul 2018 08:37:56 PM CEST</date>
     <tool>Eeschema 5.0.0</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -21,28 +21,28 @@
   <components>
     <comp ref="D1">
       <value>IR204A</value>
-      <footprint>LEDs:LED_D3.0mm</footprint>
+      <footprint>LED_THT:LED_D5.0mm_IRGrey</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="IR204A" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B433B66</tstamp>
     </comp>
     <comp ref="R2">
       <value>22Ω</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B433CA2</tstamp>
     </comp>
     <comp ref="C1">
       <value>100n</value>
-      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <footprint>Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="C" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B4343A1</tstamp>
     </comp>
     <comp ref="Q1">
       <value>2N7002</value>
-      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <datasheet>https://assets.nexperia.com/documents/data_sheet/2N7002.pdf</datasheet>
       <libsource lib="PTL-IR_remote-rescue" part="2N7002" description=""/>
       <sheetpath names="/" tstamps="/"/>
@@ -50,7 +50,7 @@
     </comp>
     <comp ref="U1">
       <value>TSOP4838</value>
-      <footprint>Opto-Devices:IRReceiver_Vishay_MOLD-3pin</footprint>
+      <footprint>OptoDevice:Vishay_MINIMOLD-3Pin</footprint>
       <datasheet> https://www.vishay.com/docs/82459/tsop48.pdf</datasheet>
       <libsource lib="PTL-IR_remote-rescue" part="TSOP45xx" description=""/>
       <sheetpath names="/" tstamps="/"/>
@@ -58,21 +58,21 @@
     </comp>
     <comp ref="PR1">
       <value>PHOTO (1MΩ)</value>
-      <footprint>Socket_Strips:Socket_Strip_Straight_1x02_Pitch2.54mm</footprint>
+      <footprint>OptoDevice:R_LDR_4.9x4.2mm_P2.54mm_Vertical</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="R_PHOTO" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B48DA29</tstamp>
     </comp>
     <comp ref="R1">
       <value>1kΩ (10kΩ)</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B48DE24</tstamp>
     </comp>
     <comp ref="DHT22">
       <value>DHT22</value>
-      <footprint>Socket_Strips:Socket_Strip_Straight_1x04_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical</footprint>
       <datasheet> https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf</datasheet>
       <libsource lib="sensors" part="DHT22_Temperature_Humidity" description="A DHT22 temperature and humidity sensor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -80,49 +80,49 @@
     </comp>
     <comp ref="R4">
       <value>220Ω</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B4911B0</tstamp>
     </comp>
     <comp ref="D2">
       <value>IR204A</value>
-      <footprint>LEDs:LED_D3.0mm</footprint>
+      <footprint>LED_THT:LED_D5.0mm_IRGrey</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="IR204A" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B4AEBDC</tstamp>
     </comp>
     <comp ref="R5">
       <value>4.7kΩ</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B4AFAC2</tstamp>
     </comp>
     <comp ref="J1">
       <value>8p</value>
-      <footprint>Socket_Strips:Socket_Strip_Straight_1x08_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="Conn_01x08_Male" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B4B47C9</tstamp>
     </comp>
     <comp ref="J2">
       <value>8p</value>
-      <footprint>Socket_Strips:Socket_Strip_Straight_1x08_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical</footprint>
       <libsource lib="PTL-IR_remote-rescue" part="Conn_01x08_Male" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B4B4972</tstamp>
     </comp>
     <comp ref="D3">
       <value>DIODE</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Diode_SMD:D_PowerDI-123</footprint>
       <libsource lib="pspice" part="DIODE" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5B5B8E95</tstamp>
     </comp>
     <comp ref="J4">
       <value>Pad</value>
-      <footprint>Wire_Pads:SolderWirePad_single_1-5mmDrill</footprint>
+      <footprint>Connector_Wire:SolderWirePad_1x01_Drill1.5mm</footprint>
       <datasheet>~</datasheet>
       <libsource lib="Connector" part="Conn_01x01_Female" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
@@ -130,7 +130,7 @@
     </comp>
     <comp ref="J5">
       <value>Pad</value>
-      <footprint>Wire_Pads:SolderWirePad_single_1-5mmDrill</footprint>
+      <footprint>Connector_Wire:SolderWirePad_1x01_Drill1.5mm</footprint>
       <datasheet>~</datasheet>
       <libsource lib="Connector" part="Conn_01x01_Female" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
@@ -138,7 +138,7 @@
     </comp>
     <comp ref="J3">
       <value>Pad</value>
-      <footprint>Wire_Pads:SolderWirePad_single_1-5mmDrill</footprint>
+      <footprint>Connector_Wire:SolderWirePad_1x01_Drill1.5mm</footprint>
       <datasheet>~</datasheet>
       <libsource lib="Connector" part="Conn_01x01_Female" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
@@ -154,7 +154,7 @@
     </comp>
     <comp ref="bme280">
       <value>bme280</value>
-      <footprint>Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical</footprint>
       <datasheet>https://www.embeddedadventures.com/datasheets/BME280.pdf</datasheet>
       <libsource lib="PTL-IR_remote-rescue" part="Conn_01x04_Male" description=""/>
       <sheetpath names="/" tstamps="/"/>
@@ -162,7 +162,7 @@
     </comp>
     <comp ref="D4">
       <value>WS2813</value>
-      <footprint>LEDs:LED_WS2812-PLCC6</footprint>
+      <footprint>LED_SMD:LED_WS2812_PLCC6_5.0x5.0mm_P1.6mm</footprint>
       <datasheet>http://www.normandled.com/upload/201605/WS2813%20LED%20Datasheet.pdf</datasheet>
       <libsource lib="LED" part="WS2813" description="RGB LED with integrated controller"/>
       <sheetpath names="/" tstamps="/"/>
@@ -387,116 +387,116 @@
     </library>
   </libraries>
   <nets>
-    <net code="1" name="GND">
-      <node ref="C1" pin="2"/>
-      <node ref="DHT22" pin="4"/>
-      <node ref="D4" pin="5"/>
-      <node ref="R1" pin="2"/>
-      <node ref="J4" pin="1"/>
-      <node ref="Q1" pin="2"/>
-      <node ref="bme280" pin="3"/>
-      <node ref="J2" pin="8"/>
-      <node ref="U1" pin="2"/>
-    </net>
-    <net code="2" name="+3V3">
+    <net code="1" name="+3V3">
       <node ref="R4" pin="1"/>
-      <node ref="R5" pin="2"/>
-      <node ref="J1" pin="1"/>
-      <node ref="DHT22" pin="1"/>
-      <node ref="PR1" pin="1"/>
       <node ref="J3" pin="1"/>
+      <node ref="PR1" pin="1"/>
+      <node ref="DHT22" pin="1"/>
       <node ref="bme280" pin="4"/>
+      <node ref="J1" pin="1"/>
+      <node ref="R5" pin="2"/>
     </net>
-    <net code="3" name="Net-(D4-Pad2)">
+    <net code="2" name="Net-(D4-Pad2)">
       <node ref="D4" pin="2"/>
     </net>
-    <net code="4" name="Net-(D4-Pad3)">
+    <net code="3" name="Net-(D4-Pad3)">
       <node ref="D4" pin="3"/>
     </net>
-    <net code="5" name="SCL">
-      <node ref="bme280" pin="2"/>
-      <node ref="J2" pin="3"/>
-    </net>
-    <net code="6" name="SDA">
-      <node ref="bme280" pin="1"/>
-      <node ref="J2" pin="4"/>
-    </net>
-    <net code="7" name="Net-(C1-Pad1)">
-      <node ref="U1" pin="3"/>
-      <node ref="R4" pin="2"/>
-      <node ref="C1" pin="1"/>
-    </net>
-    <net code="8" name="Net-(D3-Pad2)">
-      <node ref="D3" pin="2"/>
-      <node ref="D4" pin="1"/>
-    </net>
-    <net code="9" name="RGB">
-      <node ref="J2" pin="2"/>
-      <node ref="D4" pin="4"/>
-    </net>
-    <net code="10" name="DHT">
-      <node ref="DHT22" pin="2"/>
-      <node ref="J2" pin="6"/>
-    </net>
-    <net code="11" name="Net-(D4-Pad6)">
+    <net code="4" name="Net-(D4-Pad6)">
       <node ref="D4" pin="6"/>
     </net>
-    <net code="12" name="IR">
-      <node ref="Q1" pin="1"/>
-      <node ref="J2" pin="5"/>
-    </net>
-    <net code="13" name="IRM">
-      <node ref="U1" pin="1"/>
+    <net code="5" name="IRM">
       <node ref="J1" pin="5"/>
+      <node ref="U1" pin="1"/>
     </net>
-    <net code="14" name="OneW">
+    <net code="6" name="Net-(C1-Pad1)">
+      <node ref="R4" pin="2"/>
+      <node ref="C1" pin="1"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="7" name="Net-(D3-Pad2)">
+      <node ref="D4" pin="1"/>
+      <node ref="D3" pin="2"/>
+    </net>
+    <net code="8" name="OneW">
       <node ref="J1" pin="4"/>
+      <node ref="J5" pin="1"/>
+      <node ref="R5" pin="1"/>
+    </net>
+    <net code="9" name="Net-(J2-Pad2)">
+      <node ref="J2" pin="2"/>
+    </net>
+    <net code="10" name="/SCL">
       <node ref="JP1" pin="2"/>
+      <node ref="bme280" pin="2"/>
     </net>
-    <net code="15" name="Net-(J1-Pad6)">
-      <node ref="J1" pin="6"/>
+    <net code="11" name="D2">
+      <node ref="J2" pin="3"/>
+      <node ref="JP1" pin="1"/>
+      <node ref="D4" pin="4"/>
     </net>
-    <net code="16" name="Net-(J1-Pad3)">
-      <node ref="J1" pin="3"/>
-    </net>
-    <net code="17" name="Net-(J1-Pad2)">
+    <net code="12" name="Net-(J1-Pad2)">
       <node ref="J1" pin="2"/>
     </net>
-    <net code="18" name="Net-(J2-Pad1)">
+    <net code="13" name="Net-(J2-Pad1)">
       <node ref="J2" pin="1"/>
     </net>
-    <net code="19" name="PhR">
-      <node ref="J1" pin="7"/>
-      <node ref="PR1" pin="2"/>
+    <net code="14" name="PhR">
       <node ref="R1" pin="1"/>
+      <node ref="PR1" pin="2"/>
+      <node ref="J1" pin="7"/>
     </net>
-    <net code="20" name="Net-(J1-Pad8)">
-      <node ref="J1" pin="8"/>
+    <net code="15" name="Net-(J1-Pad3)">
+      <node ref="J1" pin="3"/>
     </net>
-    <net code="21" name="Net-(DHT22-Pad3)">
+    <net code="16" name="GNDREF">
+      <node ref="U1" pin="2"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="J2" pin="8"/>
+      <node ref="J4" pin="1"/>
+      <node ref="D4" pin="5"/>
+      <node ref="bme280" pin="3"/>
+      <node ref="DHT22" pin="4"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="17" name="Net-(DHT22-Pad3)">
       <node ref="DHT22" pin="3"/>
     </net>
-    <net code="22" name="+5V">
-      <node ref="D2" pin="2"/>
+    <net code="18" name="+5V">
       <node ref="J2" pin="7"/>
       <node ref="D3" pin="1"/>
+      <node ref="D2" pin="2"/>
     </net>
-    <net code="23" name="Net-(D1-Pad1)">
-      <node ref="D1" pin="1"/>
+    <net code="19" name="Net-(D1-Pad1)">
       <node ref="R2" pin="1"/>
+      <node ref="D1" pin="1"/>
     </net>
-    <net code="24" name="Net-(Q1-Pad3)">
+    <net code="20" name="Net-(Q1-Pad3)">
       <node ref="R2" pin="2"/>
       <node ref="Q1" pin="3"/>
     </net>
-    <net code="25" name="Net-(J5-Pad1)">
-      <node ref="JP1" pin="1"/>
-      <node ref="R5" pin="1"/>
-      <node ref="J5" pin="1"/>
+    <net code="21" name="Net-(J1-Pad8)">
+      <node ref="J1" pin="8"/>
+    </net>
+    <net code="22" name="Net-(J1-Pad6)">
+      <node ref="J1" pin="6"/>
+    </net>
+    <net code="23" name="SDA">
+      <node ref="bme280" pin="1"/>
+      <node ref="J2" pin="4"/>
+    </net>
+    <net code="24" name="IR">
+      <node ref="Q1" pin="1"/>
+      <node ref="J2" pin="5"/>
+    </net>
+    <net code="25" name="DHT">
+      <node ref="DHT22" pin="2"/>
+      <node ref="J2" pin="6"/>
     </net>
     <net code="26" name="Net-(D1-Pad2)">
-      <node ref="D2" pin="1"/>
       <node ref="D1" pin="2"/>
+      <node ref="D2" pin="1"/>
     </net>
   </nets>
 </export>

@@ -821,8 +821,6 @@ Wire Wire Line
 	2850 1250 3150 1250
 Wire Wire Line
 	8000 2200 8000 2350
-Wire Wire Line
-	1700 4850 1900 4850
 $Comp
 L power:+5V #PWR0101
 U 1 1 5B5B519E
@@ -834,18 +832,14 @@ F 3 "" H 5450 1400 50  0001 C CNN
 	1    5450 1400
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7350 4800 6850 4800
 Text Label 7150 4900 0    60   ~ 0
-SCL
+D2
 Text Label 7150 5000 0    60   ~ 0
 SDA
 Text Label 7150 5100 0    60   ~ 0
 D3
 Text Label 7150 5200 0    60   ~ 0
 D4
-Text Label 7150 4800 0    60   ~ 0
-RX
 $Comp
 L pspice:DIODE D3
 U 1 1 5B5B8E95
@@ -949,12 +943,12 @@ $EndComp
 $Comp
 L Device:Jumper JP1
 U 1 1 5B5D2C34
-P 2200 4850
-F 0 "JP1" H 2200 5114 50  0000 C CNN
-F 1 "Jumper" H 2200 5023 50  0000 C CNN
-F 2 "PTL-ino:solder-jumper-2" H 2200 4850 50  0001 C CNN
-F 3 "~" H 2200 4850 50  0001 C CNN
-	1    2200 4850
+P 1850 7100
+F 0 "JP1" H 1850 7364 50  0000 C CNN
+F 1 "Jumper" H 1850 7273 50  0000 C CNN
+F 2 "PTL-ino:solder-jumper-2" H 1850 7100 50  0001 C CNN
+F 3 "~" H 1850 7100 50  0001 C CNN
+	1    1850 7100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -962,7 +956,7 @@ Wire Wire Line
 Text Notes 1750 4450 0    60   ~ 0
 Optional DS18B20\n(one wire)
 Wire Wire Line
-	1600 7000 1600 7050
+	950  7000 950  7050
 Wire Wire Line
 	6850 4900 7350 4900
 Wire Wire Line
@@ -1000,7 +994,7 @@ F 3 "" H 1950 6650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1600 7000 2550 7000
+	950  7000 2550 7000
 $Comp
 L PTL-IR_remote-rescue:Conn_01x04_Male bme280
 U 1 1 5B48E4DC
@@ -1048,8 +1042,6 @@ OneW
 Text GLabel 5700 5100 0    60   BiDi ~ 0
 OneW
 Wire Wire Line
-	2500 4850 2650 4850
-Wire Wire Line
 	3100 5150 1700 5150
 Connection ~ 1700 5150
 $Comp
@@ -1068,15 +1060,13 @@ Wire Wire Line
 Wire Wire Line
 	5100 5400 5100 5350
 Text GLabel 4650 2450 0    60   Input ~ 0
-RGB
-Text GLabel 7350 4800 2    60   Output ~ 0
-RGB
+D2
 Text GLabel 7350 4900 2    60   Output ~ 0
-SCL
+D2
 Text GLabel 7350 5000 2    60   Output ~ 0
 SDA
-Text GLabel 2150 7100 0    60   Input ~ 0
-SCL
+Text GLabel 1450 7100 0    60   Input ~ 0
+D2
 Text GLabel 2150 7200 0    60   Input ~ 0
 SDA
 Connection ~ 2350 6900
@@ -1157,12 +1147,12 @@ $EndComp
 $Comp
 L power:GNDREF #PWR0108
 U 1 1 5B5D9D23
-P 1600 7050
-F 0 "#PWR0108" H 1600 6800 50  0001 C CNN
-F 1 "GNDREF" H 1605 6877 50  0000 C CNN
-F 2 "" H 1600 7050 50  0001 C CNN
-F 3 "" H 1600 7050 50  0001 C CNN
-	1    1600 7050
+P 950 7050
+F 0 "#PWR0108" H 950 6800 50  0001 C CNN
+F 1 "GNDREF" H 955 6877 50  0000 C CNN
+F 2 "" H 950 7050 50  0001 C CNN
+F 3 "" H 950 7050 50  0001 C CNN
+	1    950  7050
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1221,4 +1211,11 @@ F 3 "" H 3100 5450 50  0001 C CNN
 	1    3100 5450
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	1700 4850 2650 4850
+Wire Wire Line
+	1550 7100 1450 7100
+NoConn ~ 6850 4800
+Text Label 2300 7100 0    60   ~ 0
+SCL
 $EndSCHEMATC
