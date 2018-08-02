@@ -146,7 +146,7 @@ P 2000 2950
 F 0 "DHT22" H 2000 4000 60  0000 C CNN
 F 1 "DHT22" H 2000 3900 60  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 2000 2950 60  0001 C CNN
-F 3 " https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf" H 2000 2950 60  0000 C CNN
+F 3 " https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf" V 2000 2950 60  0001 C CNN
 	1    2000 2950
 	0    1    1    0   
 $EndComp
@@ -224,9 +224,9 @@ $EndComp
 Wire Wire Line
 	10200 2100 10200 1900
 Wire Wire Line
-	1400 4850 1700 4850
+	1150 4850 1700 4850
 Wire Wire Line
-	1400 5450 3100 5450
+	1300 5450 3100 5450
 Text Label 5750 5100 0    60   ~ 0
 D6
 $Comp
@@ -908,39 +908,6 @@ Connection ~ 5450 2000
 Wire Wire Line
 	5450 2000 5450 2150
 $Comp
-L Connector:Conn_01x01_Female J4
-U 1 1 5B5C66AB
-P 1200 5450
-F 0 "J4" H 1094 5225 50  0000 C CNN
-F 1 "Pad" H 1094 5316 50  0000 C CNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 1200 5450 50  0001 C CNN
-F 3 "~" H 1200 5450 50  0001 C CNN
-	1    1200 5450
-	-1   0    0    1   
-$EndComp
-$Comp
-L Connector:Conn_01x01_Female J5
-U 1 1 5B5C7D58
-P 1200 4850
-F 0 "J5" H 1094 4625 50  0000 C CNN
-F 1 "Pad" H 1094 4716 50  0000 C CNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 1200 4850 50  0001 C CNN
-F 3 "~" H 1200 4850 50  0001 C CNN
-	1    1200 4850
-	-1   0    0    1   
-$EndComp
-$Comp
-L Connector:Conn_01x01_Female J3
-U 1 1 5B5C7EFD
-P 1200 5150
-F 0 "J3" H 1094 4925 50  0000 C CNN
-F 1 "Pad" H 1094 5016 50  0000 C CNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 1200 5150 50  0001 C CNN
-F 3 "~" H 1200 5150 50  0001 C CNN
-	1    1200 5150
-	-1   0    0    1   
-$EndComp
-$Comp
 L Device:Jumper JP1
 U 1 1 5B5D2C34
 P 1850 7100
@@ -1109,8 +1076,6 @@ Text Notes 9950 1000 0    60   ~ 0
 IR transmitter
 Wire Wire Line
 	1450 5150 1700 5150
-Wire Wire Line
-	1400 5150 1700 5150
 $Comp
 L power:GNDREF #PWR0106
 U 1 1 5B5D99AC
@@ -1218,4 +1183,23 @@ Wire Wire Line
 NoConn ~ 6850 4800
 Text Label 2300 7100 0    60   ~ 0
 SCL
+$Comp
+L Connector:Conn_01x03_Female J4
+U 1 1 5B62EF32
+P 950 4950
+F 0 "J4" H 844 4625 50  0000 C CNN
+F 1 "Conn_01x03_Female" H 844 4716 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 950 4950 50  0001 C CNN
+F 3 "~" H 950 4950 50  0001 C CNN
+	1    950  4950
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1450 5150 1450 4950
+Wire Wire Line
+	1450 4950 1150 4950
+Wire Wire Line
+	1300 5450 1300 5050
+Wire Wire Line
+	1300 5050 1150 5050
 $EndSCHEMATC
