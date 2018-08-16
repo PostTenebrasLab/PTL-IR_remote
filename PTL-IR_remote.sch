@@ -26,7 +26,7 @@ F 3 "" H 10200 1300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PTL-IR_remote-rescue:IR204A D1
+L LED:IR204A D1
 U 1 1 5B433B66
 P 10200 2200
 F 0 "D1" H 10220 2270 50  0000 L CNN
@@ -37,7 +37,7 @@ F 3 "" H 10150 2200 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L PTL-IR_remote-rescue:R R2
+L Device:R R2
 U 1 1 5B433CA2
 P 10200 2700
 F 0 "R2" V 10280 2700 50  0000 C CNN
@@ -56,7 +56,7 @@ Wire Wire Line
 Wire Wire Line
 	10200 3500 10200 3400
 $Comp
-L PTL-IR_remote-rescue:C C1
+L Device:C C1
 U 1 1 5B4343A1
 P 2850 1450
 F 0 "C1" H 2875 1550 50  0000 L CNN
@@ -77,7 +77,7 @@ Wire Wire Line
 Wire Wire Line
 	2200 1250 2850 1250
 $Comp
-L PTL-IR_remote-rescue:2N7002 Q1
+L Transistor_FET:2N7002 Q1
 U 1 1 5B48C0DB
 P 10100 3200
 F 0 "Q1" H 10300 3275 50  0000 L CNN
@@ -88,7 +88,7 @@ F 3 "https://assets.nexperia.com/documents/data_sheet/2N7002.pdf" H 10100 3200 5
 	1    0    0    -1  
 $EndComp
 $Comp
-L PTL-IR_remote-rescue:TSOP45xx U1
+L Interface_Optical:TSOP45xx U1
 U 1 1 5B48CD02
 P 1800 1450
 F 0 "U1" H 1400 1750 50  0000 L CNN
@@ -105,7 +105,7 @@ NoConn ~ 6000 5300
 NoConn ~ 6850 4700
 Connection ~ 2850 1250
 $Comp
-L PTL-IR_remote-rescue:R_PHOTO PR1
+L Sensor_Optical:A1050 PR1
 U 1 1 5B48DA29
 P 8000 1950
 F 0 "PR1" H 8050 2000 50  0000 L CNN
@@ -116,7 +116,7 @@ F 3 "" H 8000 1900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PTL-IR_remote-rescue:R R1
+L Device:R R1
 U 1 1 5B48DE24
 P 8000 2500
 F 0 "R1" V 8080 2500 50  0000 C CNN
@@ -135,25 +135,17 @@ Wire Wire Line
 Wire Wire Line
 	8300 2200 8000 2200
 Connection ~ 8000 2200
-Wire Wire Line
-	6850 5300 7050 5300
-Wire Wire Line
-	1600 3100 2000 3100
 $Comp
-L sensors:DHT22_Temperature_Humidity DHT22
+L Sensor:DHT11 DHT22
 U 1 1 5B48F14D
-P 2000 2950
-F 0 "DHT22" H 2000 4000 60  0000 C CNN
-F 1 "DHT22" H 2000 3900 60  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 2000 2950 60  0001 C CNN
-F 3 " https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf" V 2000 2950 60  0001 C CNN
-	1    2000 2950
+P 2500 2950
+F 0 "DHT22" H 2600 3350 60  0000 C CNN
+F 1 "DHT22" H 2600 3250 60  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 2500 2950 60  0001 C CNN
+F 3 " https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf" V 2500 2950 60  0001 C CNN
+	1    2500 2950
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	1600 3100 1600 3250
-Wire Wire Line
-	1750 2750 1750 2800
 Text Label 5750 4800 0    60   ~ 0
 ADC
 Text Label 5750 5000 0    60   ~ 0
@@ -171,8 +163,6 @@ F 3 "" H 8000 1550 50  0001 C CNN
 	1    8000 1550
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1750 2800 2000 2800
 $Comp
 L power:+5V #PWR09
 U 1 1 5B490F29
@@ -198,7 +188,7 @@ $EndComp
 Wire Wire Line
 	3100 4950 3100 5150
 $Comp
-L PTL-IR_remote-rescue:R R4
+L Device:R R4
 U 1 1 5B4911B0
 P 3300 1250
 F 0 "R4" V 3380 1250 50  0000 C CNN
@@ -211,7 +201,7 @@ $EndComp
 Wire Wire Line
 	3450 1250 3550 1250
 $Comp
-L PTL-IR_remote-rescue:IR204A D2
+L LED:IR204A D2
 U 1 1 5B4AEBDC
 P 10200 1700
 F 0 "D2" H 10220 1770 50  0000 L CNN
@@ -224,13 +214,11 @@ $EndComp
 Wire Wire Line
 	10200 2100 10200 1900
 Wire Wire Line
-	1150 4850 1700 4850
-Wire Wire Line
 	1300 5450 3100 5450
 Text Label 5750 5100 0    60   ~ 0
 D6
 $Comp
-L PTL-IR_remote-rescue:R R5
+L Device:R R5
 U 1 1 5B4AFAC2
 P 1700 5000
 F 0 "R5" V 1780 5000 50  0000 C CNN
@@ -240,7 +228,6 @@ F 3 "" H 1700 5000 50  0001 C CNN
 	1    1700 5000
 	1    0    0    -1  
 $EndComp
-Connection ~ 1700 4850
 $Bitmap
 Pos 10500 6850
 Scale 1.000000
@@ -774,7 +761,7 @@ D1 DF A0 73 28 A3 4E DA 40 97 64 D9 B2 65 A9 D7 AF DF 08 12 91 CA 3F FE F8 5D 1D
 EndData
 $EndBitmap
 $Comp
-L PTL-IR_remote-rescue:Conn_01x08_Male J1
+L Connector:Conn_01x08_Male J1
 U 1 1 5B4B47C9
 P 6200 5100
 F 0 "J1" H 6200 5500 50  0000 C CNN
@@ -785,7 +772,7 @@ F 3 "" H 6200 5100 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PTL-IR_remote-rescue:Conn_01x08_Male J2
+L Connector:Conn_01x08_Male J2
 U 1 1 5B4B4972
 P 6650 5000
 F 0 "J2" H 6650 5400 50  0000 C CNN
@@ -798,12 +785,12 @@ $EndComp
 $Comp
 L power:+3.3V #PWR011
 U 1 1 5B59ECC3
-P 1750 2750
-F 0 "#PWR011" H 1750 2600 50  0001 C CNN
-F 1 "+3.3V" H 1750 2890 50  0000 C CNN
-F 2 "" H 1750 2750 50  0001 C CNN
-F 3 "" H 1750 2750 50  0001 C CNN
-	1    1750 2750
+P 3050 2750
+F 0 "#PWR011" H 3050 2600 50  0001 C CNN
+F 1 "+3.3V" H 3050 2890 50  0000 C CNN
+F 2 "" H 3050 2750 50  0001 C CNN
+F 3 "" H 3050 2750 50  0001 C CNN
+	1    3050 2750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -833,7 +820,7 @@ F 3 "" H 5450 1400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 7150 4900 0    60   ~ 0
-D2
+SCL
 Text Label 7150 5000 0    60   ~ 0
 SDA
 Text Label 7150 5100 0    60   ~ 0
@@ -963,7 +950,7 @@ $EndComp
 Wire Wire Line
 	950  7000 2550 7000
 $Comp
-L PTL-IR_remote-rescue:Conn_01x04_Male bme280
+L Connector:Conn_01x04_Male bme280
 U 1 1 5B48E4DC
 P 2750 7100
 F 0 "bme280" H 2750 7300 50  0000 C CNN
@@ -974,7 +961,7 @@ F 3 "https://www.embeddedadventures.com/datasheets/BME280.pdf" H 2750 7100 50  0
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	7800 5500 7800 5400
+	7800 5500 7800 5450
 $Comp
 L LED:WS2813 D4
 U 1 1 5B5EE0C0
@@ -1008,9 +995,6 @@ Text GLabel 2650 4850 2    60   Input ~ 0
 OneW
 Text GLabel 5700 5100 0    60   BiDi ~ 0
 OneW
-Wire Wire Line
-	3100 5150 1700 5150
-Connection ~ 1700 5150
 $Comp
 L power:+3.3V #PWR0104
 U 1 1 5B5D8BDC
@@ -1027,30 +1011,22 @@ Wire Wire Line
 Wire Wire Line
 	5100 5400 5100 5350
 Text GLabel 4650 2450 0    60   Input ~ 0
-D2
-Text GLabel 7350 4900 2    60   Output ~ 0
-D2
+RGB
+Text GLabel 7350 5200 2    60   Output ~ 0
+RGB
 Text GLabel 7350 5000 2    60   Output ~ 0
 SDA
-Text GLabel 1450 7100 0    60   Input ~ 0
-D2
 Text GLabel 2150 7200 0    60   Input ~ 0
 SDA
 Connection ~ 2350 6900
 Wire Wire Line
 	1950 6900 2350 6900
-Text GLabel 7350 5200 2    60   Input ~ 0
+Text GLabel 7350 4900 2    60   Input ~ 0
 DHT
-Text GLabel 1750 2900 0    60   Output ~ 0
+Text GLabel 2500 3400 3    60   Output ~ 0
 DHT
-Wire Wire Line
-	1750 2900 2000 2900
 Wire Wire Line
 	7350 5200 6850 5200
-Wire Wire Line
-	6850 5400 7800 5400
-Wire Wire Line
-	7050 5300 7050 5800
 Wire Wire Line
 	7050 5800 7350 5800
 Wire Wire Line
@@ -1074,8 +1050,6 @@ Text Notes 7800 1250 0    60   ~ 0
 brightness
 Text Notes 9950 1000 0    60   ~ 0
 IR transmitter
-Wire Wire Line
-	1450 5150 1700 5150
 $Comp
 L power:GNDREF #PWR0106
 U 1 1 5B5D99AC
@@ -1123,12 +1097,12 @@ $EndComp
 $Comp
 L power:GNDREF #PWR0109
 U 1 1 5B5D9DBE
-P 1600 3250
-F 0 "#PWR0109" H 1600 3000 50  0001 C CNN
-F 1 "GNDREF" H 1605 3077 50  0000 C CNN
-F 2 "" H 1600 3250 50  0001 C CNN
-F 3 "" H 1600 3250 50  0001 C CNN
-	1    1600 3250
+P 2100 2950
+F 0 "#PWR0109" H 2100 2700 50  0001 C CNN
+F 1 "GNDREF" H 2105 2777 50  0000 C CNN
+F 2 "" H 2100 2950 50  0001 C CNN
+F 3 "" H 2100 2950 50  0001 C CNN
+	1    2100 2950
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1164,7 +1138,6 @@ F 3 "~" H 7800 5400 50  0001 C CNN
 	1    7800 5400
 	1    0    0    -1  
 $EndComp
-Connection ~ 7800 5400
 $Comp
 L power:GNDREF #PWR0103
 U 1 1 5B5DA51D
@@ -1176,13 +1149,7 @@ F 3 "" H 3100 5450 50  0001 C CNN
 	1    3100 5450
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1700 4850 2650 4850
-Wire Wire Line
-	1550 7100 1450 7100
 NoConn ~ 6850 4800
-Text Label 2300 7100 0    60   ~ 0
-SCL
 $Comp
 L Connector:Conn_01x03_Female J4
 U 1 1 5B62EF32
@@ -1202,4 +1169,43 @@ Wire Wire Line
 	1300 5450 1300 5050
 Wire Wire Line
 	1300 5050 1150 5050
+Wire Wire Line
+	1150 4850 1700 4850
+Wire Wire Line
+	1450 5150 1700 5150
+Wire Wire Line
+	2500 3250 2500 3400
+Wire Wire Line
+	2200 2850 2100 2850
+Wire Wire Line
+	2100 2850 2100 2950
+Wire Wire Line
+	2800 2850 3050 2850
+Wire Wire Line
+	3050 2850 3050 2750
+Connection ~ 1700 4850
+Wire Wire Line
+	1700 4850 2650 4850
+Connection ~ 1700 5150
+Wire Wire Line
+	1700 5150 3100 5150
+Wire Wire Line
+	1550 7100 1250 7100
+Text GLabel 1250 7100 0    60   Output ~ 0
+DHT
+Text Notes 2400 7100 0    60   ~ 0
+SCL\n
+Wire Wire Line
+	7050 5800 7050 5400
+Wire Wire Line
+	7050 5400 6850 5400
+Wire Wire Line
+	6850 5300 7700 5300
+Wire Wire Line
+	7700 5300 7700 5450
+Wire Wire Line
+	7700 5450 7800 5450
+Connection ~ 7800 5450
+Wire Wire Line
+	7800 5450 7800 5400
 $EndSCHEMATC
