@@ -26,6 +26,7 @@
 WiFiManager wifiManager;
 #endif
 
+#define TEST_PERIOD 5000
 
 /****** DHT22 thermo+hum *********/
 #include "DHTesp.h"
@@ -158,9 +159,9 @@ unsigned int get_luminosity() {
     pinMode(ANALOG_PIN, INPUT);
     unsigned int val = analogRead(ANALOG_PIN);
 
-    Serial.print("    Luminosity = ");
+    Serial.print("Luminosity   test OK (2/5) : ");
     Serial.print(map(val, 0, 1023, 0, 100));
-    Serial.println();
+    Serial.println("/100 (no calibration)");
 
     return map(val, 0, 1023, 0, 100);
 }
@@ -168,11 +169,11 @@ unsigned int get_luminosity() {
 
 #ifdef TEST_IR
 void readIr(){
-   // Check if the IR code has been received.
+  // Check if the IR code has been received.
   if (irrecv.decode(&results)) {
     // Display a crude timestamp.
     uint32_t now = millis();
-    Serial.printf("Timestamp : %06u.%03u\n", now / 1000, now % 1000);
+    Serial.printf("receive IR   test OK (5/5) : %06u.%03u\n", now / 1000, now % 1000);
     if (results.overflow)
       Serial.printf("WARNING: IR code is too big for buffer (>= %d). "
                     "This result shouldn't be trusted until this is resolved. "
@@ -264,27 +265,24 @@ void loop() {
 
     float humidity = dht.getHumidity();
     float temperature = dht.getTemperature();
-  
+
+    Serial.print("DHT22 thermo test ");  
     Serial.print(dht.getStatusString());
-    Serial.print("\t");
-    Serial.print(humidity, 1);
-    Serial.print("\t\t");
+    Serial.print(" (1/5) : temp : ");
     Serial.print(temperature, 1);
-    Serial.print("\t\t");
-    Serial.print(dht.toFahrenheit(temperature), 1);
-    Serial.print("\t\t");
-    Serial.print(dht.computeHeatIndex(temperature, humidity, false), 1);
-    Serial.print("\t\t");
-    Serial.println(dht.computeHeatIndex(dht.toFahrenheit(temperature), humidity, true), 1);    
+    Serial.print(",  humidity : ");
+    Serial.print(humidity, 1);
+    Serial.print(",  adjusted heat : ");    
+    Serial.println(dht.computeHeatIndex(temperature, humidity, false), 1);
     
-    timer_dht = millis() + 3000;
+    timer_dht = millis() + TEST_PERIOD;
   }
 #endif
 
 #ifdef TEST_PHOTORES
   if(millis() > timer_photores) {
     get_luminosity();
-    timer_photores = millis() + 3000;
+    timer_photores = millis() + TEST_PERIOD;
   }
 #endif
 
@@ -294,9 +292,9 @@ void loop() {
   
   /***** send *****/
   if(millis() > timer_ir) {
-    Serial.println("Sending IR code...");
+    Serial.println("Send IR code test OK (3/5) : 0x00FFE01FUL");
     irsend.sendNEC(0x00FFE01FUL, 32);
-    timer_ir = millis() + 3000;
+    timer_ir = millis() + TEST_PERIOD;
   }
 
 #endif
@@ -308,8 +306,8 @@ void loop() {
   if(millis() > timer_led) {
     uint8_t next_mode = (ws2812fx.getMode() + 1) % ws2812fx.getModeCount();
     ws2812fx.setMode(next_mode);
-    Serial.print("mode is "); Serial.println(ws2812fx.getModeName(ws2812fx.getMode()));
-    timer_led = millis() + 3000;
+    Serial.print("LED ws2813b  test OK (4/5) : mode is "); Serial.println(ws2812fx.getModeName(ws2812fx.getMode()));
+    timer_led = millis() + TEST_PERIOD;
   }
 #endif
 
