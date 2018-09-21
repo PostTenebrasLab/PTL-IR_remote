@@ -331,16 +331,10 @@ void readIr(){
     Serial.println(_IRREMOTEESP8266_VERSION_);
     Serial.println();
 
-//    // Output RAW timing info of the result.
-//    Serial.println(resultToTimingInfo(&results));
-//    yield();  // Feed the WDT (again)
-//
-//    // Output the results as source code
-//    Serial.println(resultToSourceCode(&results));
-//    Serial.println("");  // Blank line between entries
-//    yield();  // Feed the WDT (again)
-
     const char * msg = String(resultToSourceCode(&results)).c_str();
+#ifdef MQTT
+    mqtt_client.publish(MQTTnamespace, resultToHumanReadableBasic(&results).c_str());
+#endif
   }
 }
 
@@ -402,6 +396,9 @@ void dumpACInfo(decode_results *results) {
 
 void loop() {
 
+#ifdef MQTT
+    mqttClient();
+#endif
 
 #ifdef OTA
   if ( otaUpdate ) {
@@ -425,16 +422,24 @@ void loop() {
     Serial.print(",  adjusted heat : ");    
     Serial.println(dht.computeHeatIndex(temperature, humidity, false), 1);
     Serial.println("temp to mqtt");
-    mqtt_client.publish("pub/essai", "hello world");
-    
+#ifdef MQTT
+    String dht_payload = "temp : "+String(temperature)+", hum : "+String(humidity);
+    mqtt_client.publish(MQTTnamespace, dht_payload.c_str());
+#endif
     timer_dht = millis() + TEST_PERIOD;
   }
 #endif  // TEST_DHT
 
 #ifdef TEST_PHOTORES
+
   if(millis() > timer_photores) {
     get_luminosity();
     timer_photores = millis() + TEST_PERIOD;
+
+#ifdef MQTT
+    String lum = "luminosity : "+String(get_luminosity());
+    mqtt_client.publish(MQTTnamespace, lum.c_str());
+#endif
   }
 #endif // TEST_PHOTORES
 
@@ -447,8 +452,10 @@ void loop() {
     Serial.println("Send IR code test OK (3/5) : 0x00FFE01FUL");
     irsend.sendNEC(0x00FFE01FUL, 32);
     timer_ir = millis() + TEST_PERIOD;
+#ifdef MQTT
+    mqtt_client.publish(MQTTnamespace, "IR sent 0x00FFE01FUL");
+#endif
   }
-
 #endif  //  TEST_IR
 
 

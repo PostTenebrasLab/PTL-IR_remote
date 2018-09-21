@@ -35,7 +35,7 @@
 #define MQTT_RECONNECT_TIME 5000 
 
 #define FW_UPDATE_URL   "http://172.16.1.2/firmware"
-#define MQTT_SERVER     "172.16.1.2"
+#define MQTT_SERVER     "mqtt.localdomain"
 
 void setup_wifi();
 //void resetWifi();
