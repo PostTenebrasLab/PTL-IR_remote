@@ -34,7 +34,7 @@
 #define MQTT_PORT       1883  // Default port used by MQTT servers.
 #define MQTT_RECONNECT_TIME 5000 
 
-#define FW_UPDATE_URL   "http://172.16.1.2/firmware"
+#define FW_UPDATE_URL   "http://mqtt.localdomain:8080/firmware"
 #define MQTT_SERVER     "mqtt.localdomain"
 
 void setup_wifi();

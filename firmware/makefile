@@ -18,7 +18,7 @@ IVER = -ide-version=10805
 
 
 NAME = lm00
-OTASERVER = http:\/\/172.16.1.2\/firmware
+OTASERVER = http:\/\/mqtt.localdomain:8080\/firmware
 MQTTSERVER = mqtt.localdomain
 INO = $(SKETCH:=.ino)
 BIN = $(INO:=.bin)
