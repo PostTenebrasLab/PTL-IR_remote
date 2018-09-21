@@ -17,13 +17,63 @@
  * =====================================================================================
  */
 
-#include "test_PTL_IR_remote_shield.h";
+#include "test_PTL_IR_remote_shield.h"
 
 #define TEST_WIFI
 #ifdef TEST_WIFI
+#include <DNSServer.h>
 #include <WiFiManager.h>
+#include <ESP8266mDNS.h>
 
 WiFiManager wifiManager;
+#endif
+
+
+/****** MQTT Debug *********/
+#define MQTT
+#ifdef MQTT
+
+#include <PubSubClient.h>  // v2.6.0
+WiFiClient espClient;
+
+// Callback function, when the gateway receive an MQTT value on the topics
+// subscribed this function is called
+void callback(char* topic, byte* payload, unsigned int length) {
+  // In order to republish this payload, a copy must be made
+  // as the orignal payload buffer will be overwritten whilst
+  // constructing the PUBLISH packet.
+  // Allocate the correct amount of memory for the payload copy
+  byte* payload_copy = reinterpret_cast<byte*>(malloc(length + 1));
+  // Copy the payload to the new buffer
+  memcpy(payload_copy, payload, length);
+
+  // Conversion to a printable string
+  payload_copy[length] = '\0';
+  String callback_string = String(reinterpret_cast<char*>(payload_copy));
+  String topic_name = String(reinterpret_cast<char*>(topic));
+
+  // launch the function to treat received data
+  //receivingMQTT(topic_name, callback_string);
+
+  // Free the memory
+  free(payload_copy);
+}
+PubSubClient mqtt_client(MQTT_SERVER, MQTT_PORT, callback, espClient);
+
+String mqtt_clientid = ESPID;
+uint32_t lastReconnectAttempt = 0;  // MQTT last attempt reconnection number
+bool boot = true;
+const char* mqtt_user = "";
+const char* mqtt_password = "";
+#endif   // 
+
+
+/****** OTA firmware update *********/
+#define OTA
+#ifdef OTA
+#include <ESP8266httpUpdate.h>
+
+bool otaUpdate = true;
 #endif
 
 #define TEST_PERIOD 5000
@@ -133,7 +183,7 @@ void setup() {
  */
 void setup_wifi() {
     delay(10);
-    
+
     // We start by connecting to a WiFi network
     wifiManager.setTimeout(300);  // Time out after 5 mins.
     if (!wifiManager.autoConnect(WIFI_AP_NAME)) {
@@ -141,13 +191,105 @@ void setup_wifi() {
         // Reboot. A.k.a. "Have you tried turning it Off and On again?"
         ESP.reset();
     }
-
+    if (!MDNS.begin(HOSTNAME)) {
+        Serial.println("Error setting up MDNS responder!");
+    }
     Serial.print("WiFi connected. IP address:\t");
     Serial.println(WiFi.localIP().toString());
     Serial.print("WiFi connected. MAC address:\t");
     Serial.println(WiFi.macAddress());
 }
-#endif
+#endif  //TEST_WIFI
+
+
+#ifdef MQTT
+
+bool reconnect() {
+  // Loop a few times or until we're reconnected
+  uint16_t tries = 1;
+  while (!mqtt_client.connected() && tries <= 3) {
+    int connected = false;
+    // Attempt to connect
+    Serial.println("Attempting MQTT connection to " MQTT_SERVER ":" + String(MQTT_PORT) +"... ");
+    if (mqtt_user && mqtt_password)
+      connected = mqtt_client.connect(mqtt_clientid.c_str(), mqtt_user,
+                                      mqtt_password);
+    else
+      connected = mqtt_client.connect(mqtt_clientid.c_str());
+    if (connected) {
+    // Once connected, publish an announcement...
+      mqtt_client.publish(MQTTnamespace, "Connected");
+      Serial.println("connected.");
+      // Subscribing to topic(s)
+//      subscribing(MQTTcommand);
+    } else {
+      Serial.println("failed, rc=" + String(mqtt_client.state()) +" Try again in a bit.");
+      // Wait for a bit before retrying
+      delay(tries << 7);  // Linear increasing back-off (x128)
+    }
+    tries++;
+  }
+  return mqtt_client.connected();
+}
+
+
+void mqttClient(){
+  // MQTT client connection management
+  if (!mqtt_client.connected()) {
+    uint32_t now = millis();
+    // Reconnect if it's longer than MQTT_RECONNECT_TIME since we last tried.
+    if (now - lastReconnectAttempt > MQTT_RECONNECT_TIME) {
+      lastReconnectAttempt = now;
+      Serial.println("client mqtt not connected, trying to connect");
+      // Attempt to reconnect
+      if (reconnect()) {
+        lastReconnectAttempt = 0;
+        if (boot) {
+          mqtt_client.publish(MQTTnamespace, "IR Server just booted");
+          boot = false;
+        } else {
+          mqtt_client.publish(MQTTnamespace, "IR Server just (re)connected to MQTT");
+        }
+      }
+    }
+  } else {
+    // MQTT loop
+    mqtt_client.loop();
+  }
+}
+
+#endif //MQTT
+
+
+#ifdef OTA
+/**
+ * 
+ */
+bool updateOTA(){
+
+    t_httpUpdate_return  ret = ESPhttpUpdate.update(FW_UPDATE_URL);
+
+//    Serial.println(ESPhttpUpdate.getLastError());
+    switch(ESPhttpUpdate.getLastError()) {
+        case 11:
+            Serial.println("OTA : Updating firmware...");
+            break;
+        case -11:
+            Serial.println("OTA : esp unknown in PTL esp DB...");
+            break;
+        case -1:
+            Serial.println("OTA : No server found");
+            break;
+        case -102:
+            Serial.println("OTA : No update needed current firmware is up to date.");
+            break;
+        default:
+           Serial.println("Unknown error");
+    }
+    return (ret == 11) ? true : false;    
+}
+#endif   // OTA
+
 
 #ifdef TEST_PHOTORES
 /** Get luminosity from photo-resistor
@@ -260,6 +402,14 @@ void dumpACInfo(decode_results *results) {
 
 void loop() {
 
+
+#ifdef OTA
+  if ( otaUpdate ) {
+      updateOTA();
+      otaUpdate = false;
+  }
+#endif // OTA
+
 #ifdef TEST_DHT
   if(millis() > timer_dht) {
 
@@ -274,17 +424,19 @@ void loop() {
     Serial.print(humidity, 1);
     Serial.print(",  adjusted heat : ");    
     Serial.println(dht.computeHeatIndex(temperature, humidity, false), 1);
+    Serial.println("temp to mqtt");
+    mqtt_client.publish("pub/essai", "hello world");
     
     timer_dht = millis() + TEST_PERIOD;
   }
-#endif
+#endif  // TEST_DHT
 
 #ifdef TEST_PHOTORES
   if(millis() > timer_photores) {
     get_luminosity();
     timer_photores = millis() + TEST_PERIOD;
   }
-#endif
+#endif // TEST_PHOTORES
 
 
 #ifdef TEST_IR
@@ -297,7 +449,7 @@ void loop() {
     timer_ir = millis() + TEST_PERIOD;
   }
 
-#endif
+#endif  //  TEST_IR
 
 
 #ifdef TEST_LED
@@ -309,7 +461,7 @@ void loop() {
     Serial.print("LED ws2813b  test OK (4/5) : mode is "); Serial.println(ws2812fx.getModeName(ws2812fx.getMode()));
     timer_led = millis() + TEST_PERIOD;
   }
-#endif
+#endif  // TEST_LED
 
 
 }

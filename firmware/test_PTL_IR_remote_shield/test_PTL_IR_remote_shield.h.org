@@ -21,7 +21,7 @@
 #define __TEST_PTL_IR_H__
 
 
-#define ESPID           "lm00"
+#define ESPID           "NNNN"
 
 #define FQDN(x)         x".local"
 #define AP(x)           x"_rescue"
@@ -34,8 +34,8 @@
 #define MQTT_PORT       1883  // Default port used by MQTT servers.
 #define MQTT_RECONNECT_TIME 5000 
 
-#define FW_UPDATE_URL   "http://172.16.1.2/firmware"
-#define MQTT_SERVER     "172.16.1.2"
+#define FW_UPDATE_URL   "BBBB"
+#define MQTT_SERVER     "CCCC"
 
 void setup_wifi();
 //void resetWifi();
