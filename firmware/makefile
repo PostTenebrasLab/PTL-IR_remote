@@ -1,10 +1,12 @@
 SKETCH = test_PTL_IR_remote_shield
-
-DIR = $(shell pwd)/$(SKETCH)
+PORT ?= /dev/ttyUSB0
+DIR = $(PWD)/$(SKETCH)
 BPATH = /usr/share/arduino
 APATH = /home/seba/.arduino15/packages
 
 LIBRARIES = /home/seba/Arduino/libraries
+DIR = $(PWD)/$(SKETCH)
+OUTPUT = $(PWD)/firmwares
 BUILD_DIR = $(DIR)/build
 BCACHE = $(DIR)/cache
 CC = $(BPATH)/arduino-builder
@@ -16,8 +18,8 @@ LOG = -logger=machine
 DEVICE = esp8266:esp8266:d1_mini:CpuFrequency=80,FlashSize=4M1M,LwIPVariant=v2mss536,Debug=Disabled,DebugLevel=None____,FlashErase=none,UploadSpeed=921600 
 IVER = -ide-version=10805
 
-
-NAME = lm00
+NODES = lm00 lm001 lm01 lm02 lm03 lm04 lm05 lm06 lm07 lm08 lm09 lm10
+NAME ?= lm00
 OTASERVER = http:\/\/mqtt.localdomain:8080\/firmware
 MQTTSERVER = mqtt.localdomain
 INO = $(SKETCH:=.ino)
@@ -32,19 +34,21 @@ VERBOSE = -verbose
 
 CFLAGS = $(LOG) -hardware $(HARDWARE) -hardware $(APATH) -tools $(TOOLS) -tools $(APATH) -libraries $(LIBRARIES) -fqbn=$(DEVICE) $(IVER) -build-path $(BUILD_DIR) $(WARNINGS) -build-cache $(BCACHE)
 
-#$(BUILD_DIR)/$(NAME).bin: $(BUILD_DIR)/$(BIN)
 
-$(BUILD_DIR)/$(BIN): # $(DIR)/$(INO) $(DIR)/$(HEADER).org
+$(BUILD_DIR)/$(BIN): $(DIR)/$(INO) $(DIR)/$(HEADER)
 	-mkdir -p $(BUILD_DIR)
 	-mkdir -p $(BCACHE)
-	@sed -e 's/NNNN/$(NAME)/g' -e 's/BBBB/$(OTASERVER)/g' -e 's/CCCC/$(MQTTSERVER)/g' $(DIR)/$(HEADER).org > $(DIR)/$(HEADER)
 	$(CC) $(DUMP) $(CFLAGS) $(PREFS) $(VERBOSE) $(DIR)/$(INO)
 	$(CC) $(COMPILE) $(CFLAGS) $(PREFS) $(VERBOSE) $(DIR)/$(INO)
-	mv $< $(BUILD_DIR)/$(NAME).bin
+	mv $(BUILD_DIR)/$(BIN) $(OUTPUT)/$(NAME).bin
+	-rm $(DIR)/$(HEADER)
 
-#upload: $(BUILD_DIR)/$(BIN)
-#	$(APATH)/esp8266/tools/esptool/0.4.13/esptool -vv -cd nodemcu -cb 921600 -cp /dev/ttyUSB1 -ca 0x00000 -cf $<
+$(DIR)/$(HEADER): 
+	@sed -e 's/NNNN/$(NAME)/g' -e 's/BBBB/$(OTASERVER)/g' -e 's/CCCC/$(MQTTSERVER)/g' $(DIR)/$(HEADER).org > $(DIR)/$(HEADER)
+
+upload: $(OUTPUT)/$(NAME).bin
+	$(APATH)/esp8266/tools/esptool/0.4.13/esptool -vv -cd nodemcu -cb 921600 -cp $(PORT) -ca 0x00000 -cf $<
 
 clean:
-	-rm  -rf $(BUILD_DIR)/* $(BCACHE)/*
+	-rm -rf $(DIR)/$(HEADER) $(BUILD_DIR)/* $(BCACHE)/*
 
