@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LemanMake-workshop>
+<PTL-IoT>
   <esp8266>
     <id>lm00</id>
     <name>lm00</name>
     <firmware>lm00_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>5C:CF:7F:C0:A5:98</mac>
+    <mac>84:F3:EB:B1:97:13</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -17,7 +17,7 @@
     <name>lm01</name>
     <firmware>lm01_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:2f:ae</mac>
+    <mac>84:F3:EB:0C:2F:AE</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -29,7 +29,7 @@
     <name>lm02</name>
     <firmware>lm02_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:36:f8</mac>
+    <mac>84:F3:EB:0C:36:F8</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -41,7 +41,7 @@
     <name>lm03</name>
     <firmware>lm03_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:30:89</mac>
+    <mac>84:F3:EB:0C:30:89</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -53,7 +53,7 @@
     <name>lm04</name>
     <firmware>lm04_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:31:cf</mac>
+    <mac>84:F3:EB:0C:31:CF</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -65,7 +65,7 @@
     <name>lm05</name>
     <firmware>lm05_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:37:b9</mac>
+    <mac>84:F3:EB:0C:37:B9</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -77,7 +77,7 @@
     <name>lm06</name>
     <firmware>lm06_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:37:76</mac>
+    <mac>84:F3:EB:0C:37:76</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -89,7 +89,7 @@
     <name>lm07</name>
     <firmware>lm07_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:37:76</mac>
+    <mac>84:F3:EB:0C:2D:87</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -101,7 +101,7 @@
     <name>lm08</name>
     <firmware>lm08_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:2d:8b</mac>
+    <mac>84:F3:EB:0C:2D:8B</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -113,7 +113,7 @@
     <name>lm09</name>
     <firmware>lm09_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:36:e1</mac>
+    <mac>84:F3:EB:0C:36:E1</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -125,7 +125,7 @@
     <name>lm10</name>
     <firmware>lm10_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>84:f3:eb:0c:37:c7</mac>
+    <mac>84:F3:EB:0C:37:C7</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
@@ -137,11 +137,11 @@
     <name>lm001</name>
     <firmware>lm001_test.bin</firmware>
     <description>LemanMake PTL workshop IoT esp8266 with IR/IRM</description>
-    <mac>5c:cf:7f:c0:a5:98</mac>
+    <mac>5C:CF:7F:C0:A5:98</mac>
     <sensor>DHT22</sensor>
     <sensor>IR reader</sensor>
     <sensor>Light intensity</sensor>
     <actuator>IR remote</actuator>
     <actuator>LED ws28131b</actuator>
   </esp8266>
-</LemanMake-workshop>
+</PTL-IoT>

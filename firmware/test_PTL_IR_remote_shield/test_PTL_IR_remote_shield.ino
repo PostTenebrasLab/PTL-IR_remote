@@ -284,7 +284,7 @@ bool updateOTA(){
             Serial.println("OTA : No update needed current firmware is up to date.");
             break;
         default:
-           Serial.println("Unknown error");
+           Serial.println("OTA : Unknown error");
     }
     return (ret == 11) ? true : false;    
 }
