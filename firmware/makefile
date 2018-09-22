@@ -49,6 +49,9 @@ $(DIR)/$(HEADER):
 upload: $(OUTPUT)/$(NAME).bin
 	$(APATH)/esp8266/tools/esptool/0.4.13/esptool -vv -cd nodemcu -cb 921600 -cp $(PORT) -ca 0x00000 -cf $<
 
+sync_OTA:
+	rsync -av --progress --delete $(OUTPUT) ptl@mqtt:/home/ptl/esp8266_OTA_server/public/
+
 clean:
 	-rm -rf $(DIR)/$(HEADER) $(BUILD_DIR)/* $(BCACHE)/*
 
