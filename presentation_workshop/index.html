@@ -1,0 +1,266 @@
+<!doctype html>
+<html>
+	  <head>
+		    <meta charset="utf-8">
+		    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+            <meta name="description" content="Post TenebrasL Lab Workshop LemanMake 2018">
+            <meta name="author" content="Sebastien Chassot (sinux@posttenebraslab.ch)">
+
+
+		    <title>Workshop PTL IR remote LemanMake 2018</title>
+
+		    <link rel="stylesheet" href="css/reveal.css">
+		    <!-- <link rel="stylesheet" href="css/theme/solarized.css">  -->
+            <!-- <link rel="stylesheet" href="css/theme/moon.css"> -->
+            <!-- <link rel="stylesheet" href="css/theme/serif.css"> -->
+            <!-- <link rel="stylesheet" href="css/theme/solarized.css"> -->
+		    <!-- <link rel="stylesheet" href="css/theme/moon.css"> -->
+		    <link rel="stylesheet" href="css/theme/league.css">
+
+		    <!-- Theme used for syntax highlighting of code -->
+		    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+		    <!-- Printing and PDF exports -->
+		    <script>
+			   var link = document.createElement( 'link' );
+			   link.rel = 'stylesheet';
+			   link.type = 'text/css';
+			   link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			   document.getElementsByTagName( 'head' )[0].appendChild( link );
+		    </script>
+	  </head>
+	  <body>
+		    <div class="reveal">
+	      <div class="slides">
+                <!-- Title -->
+                <section> 
+                    <img src="logo.png" width="2300">
+                    <p></p>
+                    <p style="font-size: 150%">PTL IR remote</p>
+                    <p style="font-size: 60%">Workshop LemanMake 2018</p>
+                    <p style="font-size: 80%">Post Tenebras Lab (Geneva's Hackerspace)</p>
+                    <p style="font-size: 50%">par Sebastien Chassot (sinux@posttenebraslab.ch)</p>
+                    <p style="font-size: 50%">30 septembre 2018</p>
+                    <br>
+                    <br>
+                </section>
+
+                <!-- Table of content -->
+                <!-- Introduction -->
+                <section>
+                    <p style="font-size: 100%">Introduction</p>
+                    <hr>
+                    <p style="font-size: 80%" align=left>Qu'est-ce-que <em>PTL IR remote</em> ?</p>
+                    <p style="font-size: 80%" align=left>Soudure des composants</p>
+                    <p style="font-size: 80%" align=left>Que peut-on faire avec <em>PTL IR remote</em> ?</p>
+                    <p style="font-size: 80%" align=left>Continuer à l'utiliser à la maison</p>
+                    <aside class="notes">
+                    Timer : <br>
+                    1 min <br>
+                    </aside>
+                </section>
+
+                <!-- Qu'est-ce que LoRa ? -->
+                <section>
+                    <section>
+                        Qu'est-ce que PTL IR remote ?
+                        <hr>
+                        <img style="float: right" src="images/PTL-IR_remote_case_04.png" height="400">
+
+                        <p style="font-size: 80%" align=left>Un &#956;Contrôleur esp8266</p>
+                        <p style="font-size: 80%" align=left>Emetteur IR (infra rouge)</p>
+                        <p style="font-size: 80%" align=left>Récepteur IR</p>
+                        <p style="font-size: 80%" align=left>Thermomètre et humidité</p>
+                        <p style="font-size: 80%" align=left>Led RGB</p>
+                        <p style="font-size: 80%" align=left>Luminosité (photorésistance)</p>
+                        <aside class="notes">
+                    Timer : <br>
+                    1'50'' min <br>
+                    </aside>
+                    </section>
+                    <!-- componants overview -->
+                    <section data-transition="none">
+                        Les composants à souder
+                        <hr>
+                        <img src="images/PTL-IR_remote_04.png" height="400">
+                        <p style="font-size: 80%" align=left>les composants <em>SMD</em> sont déjà soudés</p>
+                        <p style="font-size: 80%" align=left>seuls les composants <em>through hole</em> sont à souder</p>
+                    <aside class="notes">
+                    Timer : <br>
+                    2'30'' min <br>
+                    </aside>
+                    </section>
+
+                </section>
+                <!-- soudures -->
+                <section>
+                     <!-- soldering overview -->
+                    <section data-transition="none">
+                        Les soudures
+                        <hr>
+                        <img src="images/bonne-soudure.jpg" height="300">
+                        <img src="images/bonne-soudure1.jpg" height="300">
+                        <img src="pics/exemple_soudures.png" height="250">
+                        <p style="font-size: 80%" align=left>bien chauffer la base de la patte</p>
+                        <p style="font-size: 80%" align=left>quand le pad est chaud, l'étain vient naturellement <em>mouiller</em> le pad</p>
+                        <p style="font-size: 80%" align=left>une bonne soudure est brillante et recouverte de <em>flux</em> (aspect gras)</p>
+                    <aside class="notes">
+                    Timer : <br>
+                    2'30'' min <br>
+                    </aside>
+                    </section>
+                    <!-- leds IR -->
+                    <section data-transition="none">
+                        Souder les leds infra-rouge (D1, D2)
+                        <hr>
+                        <img src="pics/leds1.png" height="200">
+                        <img src="pics/leds2.png" height="200">
+                        <p style="font-size: 80%" align=left>plier les pattes à 90°, une courte et une plus plongue (attention à l'orientation)</p>
+                        <p style="font-size: 80%" align=left>attention à l'orientation la patte longue dans le trou <em>rond</em>, la courte dans le <em>carré</em>. Vérifier l'orientation du <em>plat</em> à la base de la led</p>
+                        <p style="font-size: 80%" align=left>utiliser le support pour les maintenir en place pendant la soudure</p>
+                    <aside class="notes">
+                    Timer : <br>
+                    3'15'' min <br>
+                    </aside>
+                    </section>
+                    <!-- receiver IR -->
+                    <section data-transition="none">
+                        Souder le recepteurs infra-rouge (U1)
+                        <hr>
+                        <img src="pics/exemple_receiver.png" height="300">
+                        <p style="font-size: 80%" align=center>la <em>boule</em> est orientée vers l'exterieur de la carte</p>
+                    <aside class="notes">
+                    Timer : <br>
+                    3'15'' min <br>
+                    </aside>
+                    </section>
+                    <!-- DHT22 -->
+                    <section data-transition="none">
+                        Le DHT22
+                        <hr>
+                        <img src="pics/DHT22_1.png" height="300">
+                        <img src="pics/DHT22_2.png" height="300">
+                        <p style="font-size: 80%" align=left>placer le composant verticalement et le plier à 90°</p>
+                        <p style="font-size: 80%" align=left>bien aligner les trous de passage du DHT22 et de la carte</p>
+                    <aside class="notes">
+                    Timer : <br>
+                    3'15'' min <br>
+                    </aside>
+                    </section>
+                    <!-- photores -->
+                    <section data-transition="none">
+                        La photorésistance
+                        <hr>
+                        <img src="pics/photores_1.png" height="250">
+                        <img src="pics/photores_2.png" height="250">
+                        <p style="font-size: 80%" align=left>placer la photorésistance et retourner la carte, elle doit être aproximativement à la même hauteur que le DHT22</p>
+                        <p style="font-size: 80%" align=left>l'orientation n'a aucune importance</p>
+                    <aside class="notes">
+                    Timer : <br>
+                    3'50'' min <br>
+                    </aside>
+                    </section>
+                    <!-- headers -->
+                    <section data-transition="none">
+                        Les <em>headers</em> de la carte et du µC
+                        <hr>
+                        <img src="pics/headers.png" height="300">
+                        <p style="font-size: 80%" align=left>positionner les <em>headers</em> sur la carte et le µC</p>
+                        <p style="font-size: 80%" align=left>pour maintenir les <em>headers</em> en place souder une pine exterieur puis la pine opposée</p>
+                        <p style="font-size: 80%" align=left>souder le reste des pins</p>
+                    <aside class="notes">
+                    Timer : <br>
+                    3'50'' min <br>
+                    </aside>
+                    </section>
+                </section>
+
+                <!-- Que peut-on faire avec ? -->
+                <section>
+                    <!-- verifications -->
+                    <section>
+                        Vérifier que tout fonctionne bien
+                        <hr>
+                        <p style="font-size: 90%" align=left>vérification visuelle</p>
+                        <p style="font-size: 90%" align=left>alimenter la carte...pas de <em>magic smoke</em> ?</p>
+                        <p style="font-size: 90%" align=left>le PTL-IR remote est en mode test, il devrait envoyer des données via MQTT</p>
+                        <p style="font-size: 90%" align=left>si le test passe, mise à jour du firmware via OTA</p>
+                    <aside class="notes">
+                    Timer : <br>
+                    6'00'' min <br>
+                    </aside>
+                    </section>
+                </section>
+
+                <!-- End slides -->
+                <section>
+                    <section>
+                        <h1>Questions ?</h1>
+                        <p>liens</p>
+                        <ul>
+                            <p style="font-size: 60%"> Post Tenebras Lab Geneva's hackerspace <a href="https://www.posttenebraslab.ch/">https://www.posttenebraslab.ch</a></p>
+                            <p style="font-size: 60%">page wiki du projet <a href="https://www.posttenebraslab.ch/wiki/projects/electronics/ptl-ir-remote">https://www.posttenebraslab.ch/wiki/projects/electronics/ptl-ir-remote</a></p>
+                            <p style="font-size: 60%">les ateliers LemanMake <a href="https://lemanmake.org/le-festival/ateliers-2018/">https://lemanmake.org/le-festival/ateliers-2018/</a></p>
+                        </ul>
+                    <br>
+                    </section>
+                </section>
+			      </div>
+		    </div>
+
+		    <script src="lib/js/head.min.js"></script>
+		    <script src="js/reveal.js"></script>
+
+		    <script>
+                // More info about config & dependencies:
+			    // - https://github.com/hakimel/reveal.js#configuration
+			    // - https://github.com/hakimel/reveal.js#dependencies
+
+			    Reveal.initialize({
+                    //minScale: 0.2,
+                    //maxScale: 1.0,
+                    //transition: 'convex-in concave-out',
+                    transition: 'convex',
+                    controls: true,
+                    progress: true,
+                    slideNumber: 'h.v',
+                    //slideNumber: 'c/t',
+                    showSlideNumber: 'all',
+                    overview: true,
+                    center: true,
+                    history: true,
+                    showNotes: false,
+                    //Transition style for full page slide backgrounds  // none/fade/slide/convex/concave/zoom
+                    backgroundTransition: 'fade',
+                    //Number of slides away from the current that are visible
+                    viewDistance: 3,
+                    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+
+             math: {
+                 mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+                 config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+             },
+
+    		dependencies: [
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/math/math.js', async: true },
+                { src: 'plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize(); toc_progress.create(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: 'plugin/reveal-svg-fragment.js', condition: function() { return !!document.querySelector( '[data-svg-fragment]' ); } },
+                // Zoom in and out with Alt+click
+	            { src: 'plugin/zoom-js/zoom.js', async: true },
+                // Speaker notes
+                { src: 'socket.io/socket.io.js', async: true },
+        		{ src: 'plugin/notes-server/client.js', async: true },
+             ]
+         });
+		    </script>
+	  </body>
+</html>
