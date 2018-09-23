@@ -68,7 +68,6 @@
 extern const char index_html[];
 extern const char ws2813_html[];
 extern const char ir_html[];
-String page_html;
 
 extern const char main_js[];
 extern const char ir_js[];
@@ -438,11 +437,6 @@ void loop() {
 
   if(millis() > timer_serial) {
 
-    page_html = String(index_html);
-    page_html.replace("TEMP", String(getTemperature())+" C°");
-    page_html.replace("HUM", String(getHumidity())+" %");
-    page_html.replace("LUM", String(getLuminosity())+" %");
-
     Serial.print("Temp :");
     Serial.println(getTemperature());
 
@@ -497,6 +491,12 @@ void srv_handle_not_found() {
 }
 
 void srv_handle_index_html() {
+
+  String page_html = String(index_html);
+  page_html.replace("TEMP", String(getTemperature())+" C°");
+  page_html.replace("HUM", String(getHumidity())+" %");
+  page_html.replace("LUM", String(getLuminosity())+" %");
+  
   server.send_P(200,"text/html", page_html.c_str());
 }
 
