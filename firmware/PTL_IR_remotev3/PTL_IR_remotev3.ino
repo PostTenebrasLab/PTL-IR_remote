@@ -51,18 +51,34 @@
 #include <DHTesp.h>
 #include <WS2812FX.h>
 
-#include "PTL_IR_remotev3.h"
+#include <IRremoteESP8266.h>
+#include <IRrecv.h>
+#include <IRsend.h>
+#include <IRutils.h>
+#include <ir_Daikin.h>
+#include <ir_Fujitsu.h>
+#include <ir_Gree.h>
+#include <ir_Haier.h>
+#include <ir_Kelvinator.h>
+#include <ir_Midea.h>
+#include <ir_Toshiba.h>
 
+#include "PTL_IR_remotev3.h"
 
 extern const char index_html[];
 extern const char ws2813_html[];
 extern const char ir_html[];
-extern const char main_js[];
+String page_html;
 
+extern const char main_js[];
+extern const char ir_js[];
 
 #define WIFI_TIMEOUT 30000              // checks WiFi every ...ms. Reset after this time, if WiFi cannot reconnect.
 #define HTTP_PORT 80
 
+#define CAPTURE_BUFFER_SIZE 1024
+#define TIMEOUT 15U  // Suits most messages, while not swallowing many repeats.
+#define MIN_UNKNOWN_SIZE 12
 #define DEFAULT_COLOR 0x00FF00
 #define DEFAULT_BRIGHTNESS 100  // 0..255
 #define DEFAULT_SPEED 1000
@@ -75,14 +91,29 @@ uint8_t myModes[] = {}; // *** optionally create a custom list of effect/mode nu
 boolean auto_cycle = false;
 
 
-
+/*****  WIFI  *****/
 WiFiManager wifiManager;
 ESP8266WebServer server(HTTP_PORT);
 ESP8266OTA otaUpdater;
 
+/*****  IR  *****/
+IRsend irsend = IRsend(IR_LED_PIN);
+IRrecv irrecv(IR_RECV_PIN, 1024, 15u, true);
+decode_results results;  // Somewhere to store the results
+bool ir_lock = false;  // Primitive locking for gating the IR LED.
+uint16_t * newCodeArray(const uint16_t size);
+uint16_t countValuesInStr(const String str, char sep);
+uint32_t sendReqCounter = 0;
+// HTML arguments we will parse for IR code information.
+#define argType "type"
+#define argData "code"
+#define argBits "bits"
+#define argRepeat "repeats"
+
+/*****  DHT and LED  *****/
 DHTesp dht;
 WS2812FX ws2812fx = WS2812FX(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
-long timer_dht = 0;
+long timer_serial = 0;
 
 
 // QUICKFIX...See https://github.com/esp8266/Arduino/issues/263
@@ -138,6 +169,217 @@ bool updateOTA(){
     return (ret == 11) ? true : false;    
 }
 
+void calibrateIr(int8_t* offset){
+
+  irsend.begin();
+
+  *offset = irsend.calibrate();
+
+}
+
+
+void irInit(){
+  irrecv.setUnknownThreshold(MIN_UNKNOWN_SIZE);
+  irrecv.enableIRIn();  // Start the receiver
+}
+
+
+void readIr(){
+   // Check if the IR code has been received.
+  if (irrecv.decode(&results)) {
+    // Display a crude timestamp.
+    uint32_t now = millis();
+    Serial.printf("Timestamp : %06u.%03u\n", now / 1000, now % 1000);
+    if (results.overflow)
+      Serial.printf("WARNING: IR code is too big for buffer (>= %d). "
+                    "This result shouldn't be trusted until this is resolved. "
+                    "Edit & increase CAPTURE_BUFFER_SIZE.\n",
+                    CAPTURE_BUFFER_SIZE);
+    // Display the basic output of what we found.
+    Serial.print(resultToHumanReadableBasic(&results));
+    dumpACInfo(&results);  // Display any extra A/C info if we have it.
+    yield();  // Feed the WDT as the text output can take a while to print.
+
+    // Display the library version the message was captured with.
+    Serial.print("Library   : v");
+    Serial.println(_IRREMOTEESP8266_VERSION_);
+    Serial.println();
+
+    // Output RAW timing info of the result.
+    Serial.println(resultToTimingInfo(&results));
+    yield();  // Feed the WDT (again)
+
+    // Output the results as source code
+    Serial.println(resultToSourceCode(&results));
+    Serial.println("");  // Blank line between entries
+    yield();  // Feed the WDT (again)
+
+    const char * msg = String(resultToSourceCode(&results)).c_str();
+  }
+}
+
+
+// needed by http server (display counter)
+uint32_t getReqCounter(){
+  return sendReqCounter;
+}
+
+// Arduino framework doesn't support strtoull(), so make our own one.
+uint64_t getUInt64fromHex(char const *str) {
+    uint64_t result = 0;
+    uint16_t offset = 0;
+    // Skip any leading '0x' or '0X' prefix.
+    if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
+       offset = 2;
+    for (; isxdigit((unsigned char)str[offset]); offset++) {
+        char c = str[offset];
+        result *= 16;
+        if (isdigit(c)) /* '0' .. '9' */
+          result += c - '0';
+        else if (isupper(c)) /* 'A' .. 'F' */
+          result += c - 'A' + 10;
+        else /* 'a' .. 'f'*/
+          result += c - 'a' + 10;
+    }
+    return result;
+}
+
+// Parse an IRremote Raw Hex String/code and send it.
+// Args:
+//   str: A comma-separated String containing the freq and raw IR data.
+//        e.g. "38000,9000,4500,600,1450,600,900,650,1500,..."
+//        Requires at least two comma-separated values.
+//        First value is the transmission frequency in Hz or kHz.
+void parseStringAndSendRaw(const String str) {
+  uint16_t count;
+  uint16_t freq = 38000;  // Default to 38kHz.
+  uint16_t *raw_array;
+
+  // Find out how many items there are in the string.
+  count = countValuesInStr(str, ',');
+
+  // We expect the frequency as the first comma separated value, so we need at
+  // least two values. If not, bail out.
+  if (count < 2) return;
+  count--;  // We don't count the frequency value as part of the raw array.
+
+  // Now we know how many there are, allocate the memory to store them all.
+  raw_array = newCodeArray(count);
+
+  // Grab the first value from the string, as it is the frequency.
+  int16_t index = str.indexOf(',', 0);
+  freq = str.substring(0, index).toInt();
+  uint16_t start_from = index + 1;
+  // Rest of the string are values for the raw array.
+  // Now convert the strings to integers and place them in raw_array.
+  count = 0;
+  do {
+    index = str.indexOf(',', start_from);
+    raw_array[count] = str.substring(start_from, index).toInt();
+    start_from = index + 1;
+    count++;
+  } while (index != -1);
+
+  irsend.sendRaw(raw_array, count, freq);  // All done. Send it.
+  free(raw_array);  // Free up the memory allocated.
+}
+
+
+// Dynamically allocate an array of uint16_t's.
+// Args:
+//   size:  Nr. of uint16_t's need to be in the new array.
+// Returns:
+//   A Ptr to the new array. Restarts the ESP8266 if it fails.
+uint16_t * newCodeArray(const uint16_t size) {
+  uint16_t *result;
+
+  result = reinterpret_cast<uint16_t*>(malloc(size * sizeof(uint16_t)));
+  // Check we malloc'ed successfully.
+  if (result == NULL) {  // malloc failed, so give up.
+    Serial.printf("\nCan't allocate %d bytes. (%d bytes free)\n",
+                  size * sizeof(uint16_t), ESP.getFreeHeap());
+    Serial.println("Giving up & forcing a reboot.");
+    ESP.restart();  // Reboot.
+    delay(500);  // Wait for the restart to happen.
+    return result;  // Should never get here, but just in case.
+  }
+  return result;
+}
+
+
+// Count how many values are in the String.
+// Args:
+//   str:  String containing the values.
+//   sep:  Character that separates the values.
+// Returns:
+//   The number of values found in the String.
+uint16_t countValuesInStr(const String str, char sep) {
+  int16_t index = -1;
+  uint16_t count = 1;
+  do {
+    index = str.indexOf(sep, index + 1);
+    count++;
+  } while (index != -1);
+  return count;
+}
+
+
+// Display the human readable state of an A/C message if we can.
+void dumpACInfo(decode_results *results) {
+  String description = "";
+#if DECODE_DAIKIN
+  if (results->decode_type == DAIKIN) {
+    IRDaikinESP ac(0);
+    ac.setRaw(results->state);
+    description = ac.toString();
+  }
+#endif  // DECODE_DAIKIN
+#if DECODE_FUJITSU_AC
+  if (results->decode_type == FUJITSU_AC) {
+    IRFujitsuAC ac(0);
+    ac.setRaw(results->state, results->bits / 8);
+    description = ac.toString();
+  }
+#endif  // DECODE_FUJITSU_AC
+#if DECODE_KELVINATOR
+  if (results->decode_type == KELVINATOR) {
+    IRKelvinatorAC ac(0);
+    ac.setRaw(results->state);
+    description = ac.toString();
+  }
+#endif  // DECODE_KELVINATOR
+#if DECODE_TOSHIBA_AC
+  if (results->decode_type == TOSHIBA_AC) {
+    IRToshibaAC ac(0);
+    ac.setRaw(results->state);
+    description = ac.toString();
+  }
+#endif  // DECODE_TOSHIBA_AC
+#if DECODE_GREE
+  if (results->decode_type == GREE) {
+    IRGreeAC ac(0);
+    ac.setRaw(results->state);
+    description = ac.toString();
+  }
+#endif  // DECODE_GREE
+#if DECODE_MIDEA
+  if (results->decode_type == MIDEA) {
+    IRMideaAC ac(0);
+    ac.setRaw(results->value);  // Midea uses value instead of state.
+    description = ac.toString();
+  }
+#endif  // DECODE_MIDEA
+#if DECODE_HAIER_AC
+  if (results->decode_type == HAIER_AC) {
+    IRHaierAC ac(0);
+    ac.setRaw(results->state);
+    description = ac.toString();
+  }
+#endif  // DECODE_HAIER_AC
+  // If we got a human-readable description of the message, display it.
+  if (description != "")  Serial.println("Mesg Desc.: " + description);
+}
+
 void setup(){
   Serial.begin(115200);
   Serial.println();
@@ -171,12 +413,17 @@ void setup(){
   server.on("/", srv_handle_index_html);
   server.on("/led", srv_handle_ws2813_html);
   server.on("/ir", srv_handle_ir_html);
+  server.on("/ir_rest", srv_handle_ir_rest);
   server.on("/main.js", srv_handle_main_js);
+  server.on("/ir.js", srv_handle_main_js);
   server.on("/modes", srv_handle_modes);
   server.on("/set", srv_handle_set);
   server.onNotFound(srv_handle_not_found);
   server.begin();
   Serial.println("HTTP server started.");
+
+  Serial.println("IR server setup");
+  irInit();
 
   Serial.println("ready!");
 }
@@ -187,8 +434,14 @@ void loop() {
 
   server.handleClient();
   ws2812fx.service();
+  readIr();
 
-  if(millis() > timer_dht) {
+  if(millis() > timer_serial) {
+
+    page_html = String(index_html);
+    page_html.replace("TEMP", String(getTemperature())+" C°");
+    page_html.replace("HUM", String(getHumidity())+" %");
+    page_html.replace("LUM", String(getLuminosity())+" %");
 
     Serial.print("Temp :");
     Serial.println(getTemperature());
@@ -199,7 +452,7 @@ void loop() {
     Serial.print("Lum :");
     Serial.println(getLuminosity());
 
-    timer_dht = millis() + 2000;
+    timer_serial = millis() + 2000;
   }
 
   if(auto_cycle && (now - auto_last_change > 10000)) { // cycle effect mode every 10 seconds
@@ -244,7 +497,7 @@ void srv_handle_not_found() {
 }
 
 void srv_handle_index_html() {
-  server.send_P(200,"text/html", index_html);
+  server.send_P(200,"text/html", page_html.c_str());
 }
 
 void srv_handle_ws2813_html() {
@@ -255,8 +508,29 @@ void srv_handle_ir_html() {
   server.send_P(200,"text/html", ir_html);
 }
 
+// Parse the URL args to find the IR code.
+void srv_handle_ir_rest() {
+    uint64_t data = 0;
+    String data_str = "";
+  
+    for (uint16_t i = 0; i < server.args(); i++) {
+        if (server.argName(i) == argData) {
+            data = getUInt64fromHex(server.arg(i).c_str());
+            data_str = server.arg(i);
+        }
+    }
+  
+    Serial.println("New code received via HTTP");
+    parseStringAndSendRaw(data_str.c_str());
+    srv_handle_index_html();
+}
+
 void srv_handle_main_js() {
   server.send_P(200,"application/javascript", main_js);
+}
+
+void srv_handle_ir_js() {
+  server.send_P(200,"application/javascript", ir_js);
 }
 
 void srv_handle_modes() {

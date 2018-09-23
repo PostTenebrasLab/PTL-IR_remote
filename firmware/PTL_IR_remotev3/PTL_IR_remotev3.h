@@ -35,7 +35,7 @@ bool updateOTA();
 
 #define FQDN(x)         x".local"
 #define AP(x)           x"_rescue"
-#define PREFIX(x)       "pub/"x"/workshop_test"
+#define PREFIX(x)       "pub/"x
 
 
 #define HOSTNAME        FQDN(ESPID)

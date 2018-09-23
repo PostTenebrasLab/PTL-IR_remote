@@ -1,14 +1,15 @@
 #include <pgmspace.h>
-char ir_html[] PROGMEM = R"=====(
+char ir_html[] = R"=====(
 <!DOCTYPE html>
 <html lang='en'>
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name='viewport' content='width=device-width' />
-
+  <meta http-equiv="refresh" content="20">
+  
   <title>LemanMake workshop PTL IR Ctrl</title>
 
-  <script type='text/javascript' src='main.js'></script>
+  <script type='text/javascript' src='ir.js'></script>
 
   <style>
   * {
@@ -46,6 +47,7 @@ char ir_html[] PROGMEM = R"=====(
 
   ul#mode li {
     display:block;
+    color: white;
   }
 
   ul#brightness li, ul#speed li, ul#auto li {
@@ -72,25 +74,8 @@ char ir_html[] PROGMEM = R"=====(
 </head>
 <body>
   <h1>LemanMake workshop PTL infra-rouge remote Control</h1>
-  <canvas id='colorbar' width='75' height='1080'></canvas>
-  <div id='controls'>
-    <ul id='mode'></ul>
 
-    <ul id='brightness'>
-      <li><a href='#' class='b' id='-'>&#9788;</a></li>
-      <li><a href='#' class='b' id='+'>&#9728;</a></li>
-    </ul>
 
-    <ul id='speed'>
-      <li><a href='#' class='s' id='-'>&#8722;</a></li>
-      <li><a href='#' class='s' id='+'>&#43;</a></li>
-    </ul>
-
-    <ul id='auto'>
-      <li><a href='#' class='a' id='-'>&#9632;</a></li>
-      <li><a href='#' class='a' id='+'>&#9658;</a></li>
-    </ul>
-  </div>
 </body>
 </html>
 )=====";
