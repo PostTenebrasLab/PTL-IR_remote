@@ -1,4 +1,14 @@
+
+NAME ?= lm00
+
+ifdef TEST
 SKETCH = test_PTL_IR_remote_shield
+CNAME = $(NAME)_test
+else
+SKETCH = PTL_IR_remotev3
+CNAME = $(NAME)
+endif
+
 PORT ?= /dev/ttyUSB0
 DIR = $(PWD)/$(SKETCH)
 BPATH = /usr/share/arduino
@@ -19,7 +29,6 @@ DEVICE = esp8266:esp8266:d1_mini:CpuFrequency=80,FlashSize=4M1M,LwIPVariant=v2ms
 IVER = -ide-version=10805
 
 NODES = lm00 lm001 lm01 lm02 lm03 lm04 lm05 lm06 lm07 lm08 lm09 lm10
-NAME ?= lm00
 OTASERVER = http:\/\/mqtt.localdomain:8080\/firmware
 MQTTSERVER = mqtt.localdomain
 INO = $(SKETCH:=.ino)
@@ -40,13 +49,13 @@ $(BUILD_DIR)/$(BIN): $(DIR)/$(INO) $(DIR)/$(HEADER)
 	-mkdir -p $(BCACHE)
 	$(CC) $(DUMP) $(CFLAGS) $(PREFS) $(VERBOSE) $(DIR)/$(INO)
 	$(CC) $(COMPILE) $(CFLAGS) $(PREFS) $(VERBOSE) $(DIR)/$(INO)
-	mv $(BUILD_DIR)/$(BIN) $(OUTPUT)/$(NAME).bin
+	mv $(BUILD_DIR)/$(BIN) $(OUTPUT)/$(CNAME).bin
 	-rm $(DIR)/$(HEADER)
 
 $(DIR)/$(HEADER): 
-	@sed -e 's/NNNN/$(NAME)/g' -e 's/BBBB/$(OTASERVER)/g' -e 's/CCCC/$(MQTTSERVER)/g' $(DIR)/$(HEADER).org > $(DIR)/$(HEADER)
+	@sed -e 's/NNNN/$(CNAME)/g' -e 's/BBBB/$(OTASERVER)/g' -e 's/CCCC/$(MQTTSERVER)/g' $(DIR)/$(HEADER).org > $(DIR)/$(HEADER)
 
-upload: $(OUTPUT)/$(NAME).bin
+upload: $(OUTPUT)/$(CNAME).bin
 	$(APATH)/esp8266/tools/esptool/0.4.13/esptool -vv -cd nodemcu -cb 921600 -cp $(PORT) -ca 0x00000 -cf $<
 
 sync_OTA:
@@ -54,4 +63,20 @@ sync_OTA:
 
 clean:
 	-rm -rf $(DIR)/$(HEADER) $(BUILD_DIR)/* $(BCACHE)/*
+	@echo $(CNAME) $(TEST)
+
+help:
+	@echo "Available targets:"
+	@echo ""
+	@echo "  Usage exemple"
+	@echo ""
+	@echo " 	make NAME=firmware00 TEST= PORT=/dev/ttyUSB0"
+	@echo ""
+	@echo "  help     : this help"
+	@echo "  upload   : upload the bin (option PORT=/dev/ttyUSB0)"
+	@echo "  clean    : clean all intermediary and target files"
+	@echo "  sync_OTA : upload to OTA server"
+
+
+.PHONY: upload sync_OTA clean 
 
