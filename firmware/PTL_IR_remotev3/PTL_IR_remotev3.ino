@@ -210,7 +210,7 @@ void translateIR() // takes action based on IR code received
   {
 
   case 0xFF00FF:  
-    Serial.println(" On-            "); 
+    Serial.println(" On             "); 
     break;
 
   case 0xFF807F:  
@@ -247,54 +247,67 @@ void translateIR() // takes action based on IR code received
 
   case 0xFF30CF:  
     Serial.println(" Red            "); 
+    ws2812fx.setColor(RED);
     break;
 
   case 0xFFB04F:  
     Serial.println(" Green          "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFF708F:  
     Serial.println(" Blue           "); 
+    ws2812fx.setColor(BLUE);
     break;
 
   case 0xFF08F7:  
     Serial.println(" c1             "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFF8877:  
     Serial.println(" c2             "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFF48B7:  
     Serial.println(" c3             "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFF28D7:  
     Serial.println(" c4             "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFFA857:
     Serial.println(" c5             "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFF6897:  
     Serial.println(" c6             "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFF18E7:  
     Serial.println(" c7             "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFF9867:  
     Serial.println(" c8             "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFF58A7:  
     Serial.println(" c9             "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   case 0xFF52AD:  
     Serial.println(" 9              "); 
+    ws2812fx.setColor(GREEN);
     break;
 
   default: 
