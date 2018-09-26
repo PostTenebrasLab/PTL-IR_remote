@@ -186,36 +186,128 @@ void irInit(){
 void readIr(){
    // Check if the IR code has been received.
   if (irrecv.decode(&results)) {
-    // Display a crude timestamp.
-    uint32_t now = millis();
-    Serial.printf("Timestamp : %06u.%03u\n", now / 1000, now % 1000);
+    
+    translateIR();
+
     if (results.overflow)
       Serial.printf("WARNING: IR code is too big for buffer (>= %d). "
                     "This result shouldn't be trusted until this is resolved. "
                     "Edit & increase CAPTURE_BUFFER_SIZE.\n",
                     CAPTURE_BUFFER_SIZE);
-    // Display the basic output of what we found.
-    Serial.print(resultToHumanReadableBasic(&results));
-    dumpACInfo(&results);  // Display any extra A/C info if we have it.
-    yield();  // Feed the WDT as the text output can take a while to print.
-
-    // Display the library version the message was captured with.
-    Serial.print("Library   : v");
-    Serial.println(_IRREMOTEESP8266_VERSION_);
-    Serial.println();
-
-    // Output RAW timing info of the result.
-    Serial.println(resultToTimingInfo(&results));
     yield();  // Feed the WDT (again)
 
-    // Output the results as source code
-    Serial.println(resultToSourceCode(&results));
-    Serial.println("");  // Blank line between entries
-    yield();  // Feed the WDT (again)
-
-    const char * msg = String(resultToSourceCode(&results)).c_str();
   }
 }
+
+void translateIR() // takes action based on IR code received
+
+// describing Car MP3 IR codes 
+
+{
+
+  switch(results.value)
+
+  {
+
+  case 0xFF00FF:  
+    Serial.println(" On-            "); 
+    break;
+
+  case 0xFF807F:  
+    Serial.println(" Off            "); 
+    break;
+
+  case 0xFF40BF:  
+    Serial.println(" Flash          "); 
+    break;
+
+  case 0xFF20DF:  
+    Serial.println(" Strobe         "); 
+    break;
+
+  case 0xFFA05F:  
+    Serial.println(" Fade           "); 
+    break;
+
+  case 0xFF609F:  
+    Serial.println(" Smooth         "); 
+    break;
+
+  case 0xFF10EF:  
+    Serial.println(" Up             "); 
+    break;
+
+  case 0xFF906F:  
+    Serial.println(" Down           "); 
+    break;
+
+  case 0xFF50AF:  
+    Serial.println(" W              "); 
+    break;
+
+  case 0xFF30CF:  
+    Serial.println(" Red            "); 
+    break;
+
+  case 0xFFB04F:  
+    Serial.println(" Green          "); 
+    break;
+
+  case 0xFF708F:  
+    Serial.println(" Blue           "); 
+    break;
+
+  case 0xFF08F7:  
+    Serial.println(" c1             "); 
+    break;
+
+  case 0xFF8877:  
+    Serial.println(" c2             "); 
+    break;
+
+  case 0xFF48B7:  
+    Serial.println(" c3             "); 
+    break;
+
+  case 0xFF28D7:  
+    Serial.println(" c4             "); 
+    break;
+
+  case 0xFFA857:
+    Serial.println(" c5             "); 
+    break;
+
+  case 0xFF6897:  
+    Serial.println(" c6             "); 
+    break;
+
+  case 0xFF18E7:  
+    Serial.println(" c7             "); 
+    break;
+
+  case 0xFF9867:  
+    Serial.println(" c8             "); 
+    break;
+
+  case 0xFF58A7:  
+    Serial.println(" c9             "); 
+    break;
+
+  case 0xFF52AD:  
+    Serial.println(" 9              "); 
+    break;
+
+  default: 
+    Serial.println(" other button   ");
+
+  }
+
+  delay(500);
+
+
+} //END translateIR
+
+
 
 
 // needed by http server (display counter)
