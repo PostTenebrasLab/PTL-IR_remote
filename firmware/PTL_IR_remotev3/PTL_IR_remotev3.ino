@@ -79,7 +79,7 @@ extern const char ir_js[];
 #define TIMEOUT 15U  // Suits most messages, while not swallowing many repeats.
 #define MIN_UNKNOWN_SIZE 12
 #define DEFAULT_COLOR 0x00FF00
-#define DEFAULT_BRIGHTNESS 100  // 0..255
+#define DEFAULT_BRIGHTNESS 255  // 0..255
 #define DEFAULT_SPEED 1000
 #define DEFAULT_MODE FX_MODE_BREATH
 
@@ -88,7 +88,8 @@ unsigned long last_wifi_check_time = 0;
 String modes = "";
 uint8_t myModes[] = {}; // *** optionally create a custom list of effect/mode numbers
 boolean auto_cycle = false;
-
+int8_t brightness = DEFAULT_BRIGHTNESS;
+uint8_t lastMode;
 
 /*****  WIFI  *****/
 WiFiManager wifiManager;
@@ -210,39 +211,52 @@ void translateIR() // takes action based on IR code received
   {
 
   case 0xFF00FF:  
-    Serial.println(" On             "); 
+    Serial.println(" On             ");
+    ws2812fx.setMode(lastMode);
+    ws2812fx.setBrightness(brightness);
     break;
 
   case 0xFF807F:  
-    Serial.println(" Off            "); 
+    Serial.println(" Off            ");
+    lastMode = ws2812fx.getMode();
+    ws2812fx.setBrightness(0);
     break;
 
   case 0xFF40BF:  
-    Serial.println(" Flash          "); 
+    Serial.println(" Flash          ");
+    (ws2812fx.getMode() == 34) ? ws2812fx.setMode(0) : ws2812fx.setMode(34);
     break;
 
   case 0xFF20DF:  
-    Serial.println(" Strobe         "); 
+    Serial.println(" Strobe         ");
+    (ws2812fx.getMode() == 34) ? ws2812fx.setMode(0) : ws2812fx.setMode(34);
     break;
 
   case 0xFFA05F:  
-    Serial.println(" Fade           "); 
+    Serial.println(" Fade           ");
+    (ws2812fx.getMode() == 15) ? ws2812fx.setMode(0) : ws2812fx.setMode(15);
     break;
 
   case 0xFF609F:  
     Serial.println(" Smooth         "); 
+    (ws2812fx.getMode() == 15) ? ws2812fx.setMode(0) : ws2812fx.setMode(15);
     break;
 
   case 0xFF10EF:  
-    Serial.println(" Up             "); 
+    Serial.println(" Light Up       ");
+    brightness = (brightness >= 230) ? 255 : brightness + 25;
+    ws2812fx.setBrightness(brightness);
     break;
 
   case 0xFF906F:  
-    Serial.println(" Down           "); 
+    Serial.println(" Light Down     ");
+    brightness = (brightness <= 25) ? 0 : brightness - 25;
+    ws2812fx.setBrightness(brightness);
     break;
 
   case 0xFF50AF:  
-    Serial.println(" W              "); 
+    Serial.println(" W              ");
+    ws2812fx.setColor(WHITE);
     break;
 
   case 0xFF30CF:  
@@ -262,7 +276,7 @@ void translateIR() // takes action based on IR code received
 
   case 0xFF08F7:  
     Serial.println(" c1             "); 
-    ws2812fx.setColor(GREEN);
+    ws2812fx.setColor(ORANGE);
     break;
 
   case 0xFF8877:  
@@ -272,7 +286,7 @@ void translateIR() // takes action based on IR code received
 
   case 0xFF48B7:  
     Serial.println(" c3             "); 
-    ws2812fx.setColor(GREEN);
+    ws2812fx.setColor(BLUE);
     break;
 
   case 0xFF28D7:  
@@ -282,17 +296,17 @@ void translateIR() // takes action based on IR code received
 
   case 0xFFA857:
     Serial.println(" c5             "); 
-    ws2812fx.setColor(GREEN);
+    ws2812fx.setColor(CYAN);
     break;
 
   case 0xFF6897:  
     Serial.println(" c6             "); 
-    ws2812fx.setColor(GREEN);
+    ws2812fx.setColor(PINK);
     break;
 
   case 0xFF18E7:  
     Serial.println(" c7             "); 
-    ws2812fx.setColor(GREEN);
+    ws2812fx.setColor(YELLOW);
     break;
 
   case 0xFF9867:  
@@ -302,12 +316,12 @@ void translateIR() // takes action based on IR code received
 
   case 0xFF58A7:  
     Serial.println(" c9             "); 
-    ws2812fx.setColor(GREEN);
+    ws2812fx.setColor(MAGENTA);
     break;
 
   case 0xFF52AD:  
     Serial.println(" 9              "); 
-    ws2812fx.setColor(GREEN);
+    ws2812fx.setColor(MAGENTA);
     break;
 
   default: 
