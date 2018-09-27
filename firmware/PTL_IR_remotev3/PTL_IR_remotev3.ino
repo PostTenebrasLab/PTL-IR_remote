@@ -83,6 +83,10 @@ extern const char ir_js[];
 #define DEFAULT_SPEED 1000
 #define DEFAULT_MODE FX_MODE_BREATH
 
+
+#define DEBUG
+
+
 unsigned long auto_last_change = 0;
 unsigned long last_wifi_check_time = 0;
 String modes = "";
@@ -179,6 +183,7 @@ void calibrateIr(int8_t* offset){
 
 
 void irInit(){
+  irsend.begin();
   irrecv.setUnknownThreshold(MIN_UNKNOWN_SIZE);
   irrecv.enableIRIn();  // Start the receiver
 }
@@ -195,6 +200,9 @@ void readIr(){
                     "This result shouldn't be trusted until this is resolved. "
                     "Edit & increase CAPTURE_BUFFER_SIZE.\n",
                     CAPTURE_BUFFER_SIZE);
+#ifdef DEBUG
+    Serial.print(resultToHumanReadableBasic(&results));
+#endif
     yield();  // Feed the WDT (again)
 
   }
@@ -564,6 +572,10 @@ void loop() {
 
     Serial.print("Lum :");
     Serial.println(getLuminosity());
+
+#ifdef DEBUG
+    irsend.sendNEC(0xFFB04F, 32, 5);
+#endif
 
     timer_serial = millis() + 2000;
   }
