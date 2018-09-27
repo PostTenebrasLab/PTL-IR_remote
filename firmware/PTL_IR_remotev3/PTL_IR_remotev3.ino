@@ -71,6 +71,7 @@ extern const char ir_html[];
 
 extern const char main_js[];
 extern const char ir_js[];
+extern const char ws2813_js[];
 
 #define WIFI_TIMEOUT 30000              // checks WiFi every ...ms. Reset after this time, if WiFi cannot reconnect.
 #define HTTP_PORT 80
@@ -321,7 +322,7 @@ void translateIR() // takes action based on IR code received
 
   case 0xFF52AD:  
     Serial.println(" 9              "); 
-    ws2812fx.setColor(MAGENTA);
+    ws2812fx.setColor(PURPLE);
     break;
 
   default: 
@@ -532,8 +533,12 @@ void setup(){
   server.on("/led", srv_handle_ws2813_html);
   server.on("/ir", srv_handle_ir_html);
   server.on("/ir_rest", srv_handle_ir_rest);
+  server.on("/temp", srv_handle_temp);
+  server.on("/hum", srv_handle_hum);
+  server.on("/lum", srv_handle_lum);
   server.on("/main.js", srv_handle_main_js);
-  server.on("/ir.js", srv_handle_main_js);
+  server.on("/ir.js", srv_handle_ir_js);
+  server.on("/ws2813.js", srv_handle_ws2813_js);
   server.on("/modes", srv_handle_modes);
   server.on("/set", srv_handle_set);
   server.onNotFound(srv_handle_not_found);
@@ -610,13 +615,7 @@ void srv_handle_not_found() {
 }
 
 void srv_handle_index_html() {
-
-  String page_html = String(index_html);
-  page_html.replace("TEMP", String(getTemperature())+" C°");
-  page_html.replace("HUM", String(getHumidity())+" %");
-  page_html.replace("LUM", String(getLuminosity())+" %");
-  
-  server.send_P(200,"text/html", page_html.c_str());
+  server.send_P(200,"text/html", index_html);
 }
 
 void srv_handle_ws2813_html() {
@@ -646,6 +645,10 @@ void srv_handle_ir_rest() {
 
 void srv_handle_main_js() {
   server.send_P(200,"application/javascript", main_js);
+}
+
+void srv_handle_ws2813_js() {
+  server.send_P(200,"application/javascript", ws2813_js);
 }
 
 void srv_handle_ir_js() {
@@ -708,11 +711,29 @@ float getTemperature() {
   return dht.getTemperature();
 }
 
+void srv_handle_temp() {
+  char temp[32];
+  sprintf(temp, "Temperature : %.2f °C", getTemperature());
+  server.send(200, "text/plain", temp);
+}
+
 float getHumidity() {
   return dht.getHumidity();
 }
 
+void srv_handle_hum() {
+  char temp[32];
+  sprintf(temp, "Humidity : %.2f %%", getHumidity());
+  server.send(200, "text/plain", temp);
+}
+
 int getLuminosity() {
   return map(analogRead(ANALOG_PIN), 0, 1023, 0, 100);
+}
 
+
+void srv_handle_lum() {
+  char temp[32];
+  sprintf(temp, "Luminosity : %d %%", (int)round(getHumidity()));
+  server.send(200, "text/plain", temp);
 }

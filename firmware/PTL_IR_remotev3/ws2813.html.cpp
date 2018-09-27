@@ -8,7 +8,7 @@ char ws2813_html[] PROGMEM = R"=====(
 
   <title>LemanMake workshop by PTL WS2812FX Ctrl</title>
 
-  <script type='text/javascript' src='main.js'></script>
+  <script type='text/javascript' src='ws2813.js'></script>
 
   <style>
   * {
@@ -94,4 +94,3 @@ char ws2813_html[] PROGMEM = R"=====(
 </body>
 </html>
 )=====";
-

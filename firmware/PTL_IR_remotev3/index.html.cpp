@@ -5,7 +5,6 @@ char index_html[] = R"=====(
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name='viewport' content='width=device-width' />
-  <meta http-equiv="refresh" content="10">
 
   <title>LemanMake workshop by PTL WS2812FX Ctrl</title>
 
@@ -75,7 +74,7 @@ char index_html[] = R"=====(
 <body>
   <h1>LemanMake workshop PTL main page</h1>
 
-  <h3 style="color:white">Fonctionnalites</h3>
+  <h3 style="color:white">Fonctionnalities</h3>
   <br></br>
   <ul>
     <li><a href="/led" style="color:white">led RGB control (ws2813b)</a></li> 
@@ -84,14 +83,13 @@ char index_html[] = R"=====(
   </ul>
   <br></br>
 
-  <h3 style="color:white">Valeurs mesurees</h3>
+  <h3 style="color:white">Measured values</h3>
   <br></br>
   <ul style="text-align:left">
-    <li style="color:white">Temperature : TEMP</li>
-    <li style="color:white">Humidity    : HUM</li>
-    <li style="color:white">Luminosity  : LUM</li>
+    <li style="color:white" id='temperature'>Temperature : TEMP</li>
+    <li style="color:white" id='humidity'>Humidity    : HUM</li>
+    <li style="color:white" id='luminosity'>Luminosity  : LUM</li>
   </ul>
 </body>
 </html>
 )=====";
-

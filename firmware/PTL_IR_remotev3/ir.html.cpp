@@ -5,7 +5,6 @@ char ir_html[] = R"=====(
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name='viewport' content='width=device-width' />
-  <meta http-equiv="refresh" content="20">
   
   <title>LemanMake workshop PTL IR Ctrl</title>
 
@@ -75,8 +74,9 @@ char ir_html[] = R"=====(
 <body>
   <h1>LemanMake workshop PTL infra-rouge remote Control</h1>
 
+  <button onclick='doOn()'>On</button>
+  <button onclick='doOff()'>Off</button>
 
 </body>
 </html>
 )=====";
-
