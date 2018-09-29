@@ -85,7 +85,7 @@ extern const char ws2813_js[];
 #define DEFAULT_MODE FX_MODE_BREATH
 
 
-#define DEBUG
+//#define DEBUG
 
 
 unsigned long auto_last_change = 0;
